@@ -20,14 +20,14 @@ backend/!**/src/test/**/target/
 *.ipr
 
 ### NetBeans ###
-/frontend/nbproject/private/
-/frontend/nbbuild/
-/frontend/dist/
-/frontend/nbdist/
-/frontend/.nb-gradle/
-frontend/build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+/backend/nbproject/private/
+/backend/nbbuild/
+/backend/dist/
+/backend/nbdist/
+/backend/.nb-gradle/
+backend/build/
+backend/!**/src/main/**/build/
+backend/!**/src/test/**/build/
 
 ### VS Code ###
 .vscode/
