@@ -1,5 +1,6 @@
 import {CustomerService} from "../../service/customer-service";
 import CustomerData from "../../data/customer-data";
+import {useState} from "react";
 
 
 
@@ -13,31 +14,48 @@ export default function CustomerRegistrationComponent(){
         licenseNumber: ""
     });
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errorOccured, setErrorOccured] = useState({gotError: false, errorMessage: ''})
+
 
     const signup = (event) => {
-        event.preventDefault(true);
-        const customer = new CustomerData(
-            customerObject.firstName,
-            customerObject.lastName,
-            customerObject.passWord,
-            customerObject.email,
-            customerObject.licenseNumber);
+        (async() => {
+            try {
+                event.preventDefault(true);
+                const customer = new CustomerData(
+                    customerObject.firstName,
+                    customerObject.lastName,
+                    customerObject.passWord,
+                    customerObject.email,
+                    customerObject.licenseNumber);
 
-        //console.log(customer);
-       CustomerService.addCustomer(customer);
+                //console.log(customer);
+                const response = await CustomerService.addCustomer(customer);
+            } catch (err){
+                console.log(err);
+                setErrorOccured({gotError:true, errorMessage: err.message});
+            }
+        })();
     }
+
+    const setValue = (event) => {
+        const input = event.target;
+        setCustomerObject({...customerObject, [input.name]: input.value});
+    };
+
     return(
         <div>
+            {errorOccured.gotError && <p>{errorOccured.errorMessage}</p>}
             <form>
-                <input onChange={(event) => setCustomerObject({...customerObject, firstName: event.target.value})}
+                <input name='firstName' onChange={setValue}
                        value={customerObject.firstName} placeholder={"First Name"}/>
-                <input onChange={(event) => setCustomerObject({...customerObject, lastName: event.target.value})}
+                <input name='lastName'  onChange={setValue}
                        value={customerObject.lastName}  placeholder={"Last Name"}/>
-                <input type={"password"} onChange={(event) => setCustomerObject({...customerObject, passWord: event.target.value})}
+                <input type={"password"} name='password' onChange={setValue}
                        value={customerObject.passWord}  placeholder={"Password"}/>
-                <input onChange={(event) => setCustomerObject({...customerObject, email: event.target.value})}
+                <input name='email' onChange={setValue}
                        value={customerObject.email}  placeholder={"E-mail Address"}/>
-                <input onChange={(event) => setCustomerObject({...customerObject, licenseNumber: event.target.value})}
+                <input name='licenseNumber'  onChange={setValue}
                        value={customerObject.licenseNumber}  placeholder={"License Number"}/>
                 <button onClick={signup}>SignUp</button>
 
