@@ -4,7 +4,7 @@ import { SellerService } from "../services/seller-service";
 
 export default function SellerSignup() {
   const [seller, setSeller] = useState({
-    name: "",
+    name: { firstName: "", lastName: "" },
     emailAddress: "",
     password: "",
     address: { street: "", city: "", state: "", zipCode: "" },
@@ -15,6 +15,21 @@ export default function SellerSignup() {
     const input = e.target;
     setSeller({ ...seller, [input.name]: input.value });
   };
+  const handleName = (e) => {
+    const input = e.target;
+    setSeller({
+      ...seller,
+      name: { ...seller.name, [input.name]: input.value },
+    });
+  };
+  const handleAddress = (e) => {
+    const input = e.target;
+    setSeller({
+      ...seller,
+      address: { ...seller.address, [input.name]: input.value },
+    });
+  };
+
   const handleSignup = () => {
     SellerService.addSeller(seller);
     // if (res && res.data) {
@@ -27,14 +42,22 @@ export default function SellerSignup() {
       <h1>Welcome to the bidding system</h1>
       <input
         type="text"
-        name="name"
-        value={seller.name}
-        onChange={handleChange}
+        name="firstName"
+        value={seller.name.firstName}
+        onChange={handleName}
         style={{ marginBottom: "10px", padding: "5px" }}
-        placeholder="name"
+        placeholder="firstName"
       />
       <input
-        type="password"
+        type="text"
+        name="lastName"
+        value={seller.name.lastName}
+        onChange={handleName}
+        style={{ marginBottom: "10px", padding: "5px" }}
+        placeholder="lastName"
+      />
+      <input
+        type="text"
         name="emailAddress"
         value={seller.emailAddress}
         onChange={handleChange}
@@ -51,49 +74,33 @@ export default function SellerSignup() {
       />
       <input
         type="text"
+        name="street"
         value={seller.address.street}
-        onChange={(e) =>
-          setSeller({
-            ...seller,
-            address: { ...seller.address, street: e.target.value },
-          })
-        }
+        onChange={handleAddress}
         style={{ marginBottom: "10px", padding: "5px" }}
         placeholder="street"
       />
       <input
         type="text"
+        name="city"
         value={seller.address.city}
-        onChange={(e) =>
-          setSeller({
-            ...seller,
-            address: { ...seller.address, city: e.target.value },
-          })
-        }
+        onChange={handleAddress}
         style={{ marginBottom: "10px", padding: "5px" }}
         placeholder="city"
       />
       <input
         type="text"
+        name="state"
         value={seller.address.state}
-        onChange={(e) =>
-          setSeller({
-            ...seller,
-            address: { ...seller.address, state: e.target.value },
-          })
-        }
+        onChange={handleAddress}
         style={{ marginBottom: "10px", padding: "5px" }}
         placeholder="state"
       />
       <input
         type="text"
+        name="zipCode"
         value={seller.address.zipCode}
-        onChange={(e) =>
-          setSeller({
-            ...seller,
-            address: { ...seller.address, zipCode: e.target.value },
-          })
-        }
+        onChange={handleAddress}
         style={{ marginBottom: "10px", padding: "5px" }}
         placeholder="zipCode"
       />
