@@ -1,6 +1,10 @@
 import Bid from "./bid";
 import Product from "./product";
 import React, { useEffect, useState } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+
 export default function Home() {
   const bids = [
     {
@@ -51,12 +55,17 @@ export default function Home() {
   }, []);
   return (
     <div>
-      <p></p>
+      <Container>
+        <Row>
+          <Col>1 of 1</Col>
+        </Row>
+      </Container>
+      {/* <p></p>
       <ul>
         {bid.bids.map((b, index) => (
           <li key={index}>{b.price}Hey</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 }

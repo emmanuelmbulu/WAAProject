@@ -1,16 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import login from "../network";
+import { authenticationService } from "../services/authentication-service";
 
 export default function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    const res = await login(user);
+  const handleLogin = () => {
+    authenticationService.login(user);
     // if (res && res.data) {
     navigate("/home");
     // }
+
+    // const res = await login(user);
+    // // if (res && res.data) {
+    // navigate("/home");
+    // // }
   };
 
   return (
