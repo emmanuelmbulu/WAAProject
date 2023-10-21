@@ -15,7 +15,7 @@ export default function CustomerRegistrationComponent(){
     });
 
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [errorOccured, setErrorOccured] = useState({gotError: false, errorMessage: ''})
+    const [errorOccured, setErrorOccured] = useState({gotError: false, errorMessage: ''});
 
 
     const signup = (event) => {
