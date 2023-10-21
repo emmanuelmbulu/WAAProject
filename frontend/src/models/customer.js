@@ -1,7 +1,8 @@
 export class Customer{
 
-    constructor(name, email, licenseNumber){
+    constructor(name, password, email, licenseNumber){
         this.name = name;
+        this.password = password;
         this.email = email;
         this.licenseNumber = licenseNumber;
     }

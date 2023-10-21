@@ -14,7 +14,7 @@ export default function CustomerRegistrationComponent(){
         event.preventDefault(true);
         const customer = new Customer(input1.current.value, input2.current.value, input3.current.value, input4.current.value);
         console.log(customer);
-        //CustomerService.addCustomer(customer);
+       //CustomerService.addCustomer(customer);
     }
     return(
         <div>
