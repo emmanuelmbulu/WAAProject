@@ -1,12 +1,27 @@
 import { useState, useContext } from "react";
+import { BidService } from "../services/bid-service";
 // import GlobalContext from "./core/context";
 export default function Bid() {
-  const [bid, setBid] = useState({});
-  //   const { state, setState } = useContext(GlobalContext);
+  const [bid, setBid] = useState({ amount: 0 });
+
+  const handleBid = () => {
+    const startingPrice = 100;
+    if (bid.amount < startingPrice) {
+      alert("put a valid amount");
+    } else {
+      const bidData = { productId: 1, bid, customerId: 1 };
+      BidService.putBid(bidData);
+    }
+  };
   return (
     <div>
-      <p>Starts on {}</p>
-      {/* <button onClick={handleBid}>Bid Now</button> */}
+      <input
+        type="text"
+        value={bid.amount}
+        placeholder="Bidding Amount"
+        onChange={(e) => setBid({ amount: e.target.value })}
+      />
+      <button onClick={handleBid}>Start Bidding</button>
     </div>
   );
 }
