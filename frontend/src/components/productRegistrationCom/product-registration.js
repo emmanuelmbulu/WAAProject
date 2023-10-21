@@ -31,6 +31,7 @@ export default function ProductRegistrationComponent(){
                     productObject.isSavedWithRelease,
                     productObject.sellerId
                 )
+                console.log(product)
                 const response = await ProductService.addProduct(product);
 
             }catch(err){
@@ -57,7 +58,7 @@ export default function ProductRegistrationComponent(){
                 <input name = 'paymentDueDate' onChange={setValues} value={productObject.paymentDueDate} placeholder={'Payment Due Date'}/>
                 <input name = 'isSavedWithRelease' onChange={setValues} value={productObject.isSavedWithRelease}  placeholder={'Saved with Release'}/>
                 <input name = 'sellerId' onChange={setValues} value={productObject.sellerId} placeholder={'Seller ID'}/>
-                <button onClick={registerProduct}>RegisterProduct</button>
+                <button onClick={registerProduct}>Register Product</button>
             </form>
         </div>
     )
