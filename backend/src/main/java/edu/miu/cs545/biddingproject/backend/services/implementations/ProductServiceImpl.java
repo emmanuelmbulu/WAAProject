@@ -13,4 +13,9 @@ public class ProductServiceImpl implements ProductService {
     public Product save(Product p) {
         return repository.save(p);
     }
+
+    @Override
+    public Product getOneById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
