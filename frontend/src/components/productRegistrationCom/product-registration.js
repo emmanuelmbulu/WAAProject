@@ -14,7 +14,7 @@ export default function ProductRegistrationComponent(){
     });
 
     const [isSubmitted, setSubmitted] = useState(false);
-    const [errorOccured, setErrorOccured] = useState({
+    const [errorOccurred, setErrorOccurred] = useState({
         gotError: false, errorMessage:""
     });
 
@@ -35,7 +35,7 @@ export default function ProductRegistrationComponent(){
                 const response = await ProductService.addProduct(product);
 
             }catch(err){
-                setErrorOccured({gotError: true, errorMessage: err.message});
+                setErrorOccurred({gotError: true, errorMessage: err.message});
             }
         })()
 
@@ -49,7 +49,7 @@ export default function ProductRegistrationComponent(){
 
     return(
         <div>
-            {errorOccured.gotError && <p>errorOccured.errorMessage</p>}
+            {errorOccurred.gotError && <p>errorOccurred.errorMessage</p>}
             <form>
                 <input name='name' onChange={setValues}  value={productObject.name} placeholder={'Product Name'}/>
                 <input name = 'description' onChange={setValues} value={productObject.description} placeholder={'Description'}/>

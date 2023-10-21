@@ -15,7 +15,7 @@ export default function CustomerRegistrationComponent(){
     });
 
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [errorOccured, setErrorOccured] = useState({gotError: false, errorMessage: ''});
+    const [errorOccurred, setErrorOccurred] = useState({gotError: false, errorMessage: ''});
 
 
     const signup = (event) => {
@@ -33,7 +33,7 @@ export default function CustomerRegistrationComponent(){
                 const response = await CustomerService.addCustomer(customer);
             } catch (err){
                 console.log(err);
-                setErrorOccured({gotError:true, errorMessage: err.message});
+                setErrorOccurred({gotError:true, errorMessage: err.message});
             }
         })();
     }
@@ -45,7 +45,7 @@ export default function CustomerRegistrationComponent(){
 
     return(
         <div>
-            {errorOccured.gotError && <p>{errorOccured.errorMessage}</p>}
+            {errorOccurred.gotError && <p>{errorOccurred.errorMessage}</p>}
             <form>
                 <input name='firstName' onChange={setValue}
                        value={customerObject.firstName} placeholder={"First Name"}/>
