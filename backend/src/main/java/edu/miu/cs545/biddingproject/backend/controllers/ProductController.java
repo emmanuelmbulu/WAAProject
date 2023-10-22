@@ -36,6 +36,7 @@ public class ProductController {
                 .biddingPrice(data.getBiddingPrice())
                 .description(data.getDescription())
                 .name(data.getName())
+                .depositAmount(data.getDepositAmount())
                 .seller(seller)
                 .isSavedWithRelease(data.isSavedWithRelease())
                 .build();

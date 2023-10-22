@@ -14,4 +14,5 @@ public class DataForNewProduct {
     private String description;
     private BiddingPrice biddingPrice;
     private boolean isSavedWithRelease;
+    private double depositAmount;
 }
