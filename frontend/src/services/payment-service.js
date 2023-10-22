@@ -1,9 +1,7 @@
-import axios from "axios";
+import {axiosInstance} from "../config/axios-config";
 
 export const PaymentService = {
     getDeposit: (customerId, productId) => {
-        return axios.get(`/"payments/deposits?prodID=${productId}&&cust=${customerId}`)
+        return axiosInstance.get(`/"payments/deposits?prod=${productId}&&cust=${customerId}`)
     }
-
-
 }
