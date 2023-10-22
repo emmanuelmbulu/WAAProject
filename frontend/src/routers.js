@@ -4,6 +4,7 @@ import Home from "./components/home";
 import Layout from "./components/layout";
 import SellerSignup from "./components/seller-signup";
 import Bid from "./components/bid";
+import ProductRegistrationComponent from "./components/productRegistrationCom/product-registration";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/bids", element: <Bid /> },
       { path: "/sellers", element: <SellerSignup /> },
+      { path: "/products", element: <ProductRegistrationComponent /> },
     ],
   },
 ]);
