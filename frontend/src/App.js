@@ -1,13 +1,10 @@
-import CustomerRegistrationComponent from "./components/customerRegistrationCom/customer-registration";
-import ProductRegistrationComponent from "./components/productRegistrationCom/product-registration";
-
+import { RouterProvider } from "react-router-dom";
+import router from "./routers";
 
 function App() {
-
   return (
     <div className="App">
-        {<CustomerRegistrationComponent/>}
-        {<ProductRegistrationComponent />}
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
