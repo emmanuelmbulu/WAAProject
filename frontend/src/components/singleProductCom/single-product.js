@@ -1,13 +1,18 @@
 import {useEffect, useState} from "react";
 import {PaymentService} from "../../service/payment-service";
+import BidData from "../../data/bidData";
+import {BidService} from "../../services/bid-service";
+import {Product} from "../../models/product";
+import {ProductService} from "../../services/product-service";
 
 
 
 
 
 export default function SingleProduct(props) {
+
     const product = props.item;
-    const customerId = product.customer;
+    const customerId = props.customer;
     const dueDate = new Date(product.biddingPrice.endingTime);
     const timeDifference = dueDate - new Date();
 
@@ -15,6 +20,12 @@ export default function SingleProduct(props) {
     const [timeLeft, setTimeLeft] = useState(timeDifference);
     const [hasBid, setHasBid] = useState(false);
     const [highestBid, setHighestBid] = useState(null);
+    const bidData = new BidData(product.id, amount, customerId);
+    const [amount, setAmount] = useState({amount:""});
+
+
+
+
 
 
     useEffect(() => {
@@ -31,7 +42,7 @@ export default function SingleProduct(props) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await BidService.putBid();
+                const response = await ProductService.getLatestBid(product.id);
                 setHasBid(true);
                 setHighestBid(response.data);
             } catch (err) {
@@ -39,6 +50,10 @@ export default function SingleProduct(props) {
             }
         })();
     });
+
+   const setPrice = () => {
+
+   }
 
 
 
@@ -56,9 +71,7 @@ export default function SingleProduct(props) {
         return `${formatTime(days)} days : ${formatTime(hours)} hh : ${formatTime(minutes)} min : ${formatTime(seconds)} sec`;
     };
 
-    const setPrice = () => {
 
-    };
 
     useEffect(()=> {
         setInterval(() => {
@@ -100,7 +113,7 @@ export default function SingleProduct(props) {
                                     <label htmlFor="amount" className="col-form-label">Enter Amount: </label>
                                 </div>
                                 <div className="col-auto">
-                                    <input name='amount' type="text" id="amount" className="form-control" placeholder='Amount' />
+                                    <input  value='amount' type="text" id="amount" className="form-control" placeholder='Amount' />
                                 </div>
                             </div>
                             <div className="modal-footer">
