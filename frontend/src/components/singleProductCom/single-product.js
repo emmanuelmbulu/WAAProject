@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {PaymentService} from "../service/payment-service";
+import {PaymentService} from "../../service/payment-service";
 
 
 

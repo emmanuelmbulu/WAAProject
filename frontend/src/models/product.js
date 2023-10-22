@@ -1,6 +1,6 @@
 
 export class Product{
-    constructor(id, name, description, price, endingTime, paymentDueDate, isSavedWithRelease) {
+    constructor(id, name, description, price, endingTime, paymentDueDate, isSavedWithRelease, deposit) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -8,6 +8,7 @@ export class Product{
             price, endingTime, paymentDueDate
         };
         this.isSavedWithRelease = isSavedWithRelease;
+        this.deposit = deposit;
     }
 
     static creatProduct(item){
