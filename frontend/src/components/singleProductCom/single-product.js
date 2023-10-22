@@ -20,7 +20,7 @@ export default function SingleProduct(props) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await PaymentService.getDeposit(custmerId, product.id);
+                const response = await PaymentService.getDeposit(customerId, product.id);
                 setCanBid(true);
             } catch (err) {
                 setCanBid(false);
@@ -31,7 +31,7 @@ export default function SingleProduct(props) {
     useEffect(() => {
         (async () => {
             try {
-                //const response = await BidService.getDeposit(custmerId, product.id);
+                const response = await BidService.getDeposit(customerId, product.id);
                 setHasBid(true);
                 setHighestBid(response.data);
             } catch (err) {
