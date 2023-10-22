@@ -9,7 +9,8 @@ export default function Bid() {
     if (bid.amount < startingPrice) {
       alert("put a valid amount");
     } else {
-      const bidData = { productId: 1, bid, customerId: 1 };
+      const price = bid.amount;
+      const bidData = { productId: 1, price, customerId: 1 };
       BidService.putBid(bidData);
     }
   };
