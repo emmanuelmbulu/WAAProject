@@ -54,18 +54,21 @@ export default function Home() {
     console.log(bids);
   }, []);
   return (
-    <div>
+    <div className="Home">
+      <h1>Welcome</h1>
       <Container>
         <Row>
-          <Col>1 of 1</Col>
+          {/* {bids.map((bid, index) => (
+            <Col xs={6} md={2} key={index}>
+              <Cards
+                title={bid.product.name}
+                currentDateTime={currentDateTime}
+                picture={bid.product.picture}
+              />
+            </Col>
+          ))} */}
         </Row>
       </Container>
-      {/* <p></p>
-      <ul>
-        {bid.bids.map((b, index) => (
-          <li key={index}>{b.price}Hey</li>
-        ))}
-      </ul> */}
     </div>
   );
 }
