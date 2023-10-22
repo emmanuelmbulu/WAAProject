@@ -18,17 +18,4 @@ export class Product {
     };
     this.isSavedWithRelease = isSavedWithRelease;
   }
-
-  static creatProduct(item) {
-    return new Product(
-      item.id,
-      item.name,
-      item.description,
-      item.biddingPrice.price,
-      item.biddingPrice.endingTime,
-      item.biddingPrice.paymentDueDate,
-      item.biddingPrice,
-      this.isSavedWithRelease
-    );
-  }
 }
