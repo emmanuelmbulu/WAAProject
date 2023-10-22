@@ -5,6 +5,7 @@ backend/!**/src/main/**/target/
 backend/!**/src/test/**/target/
 
 *.properties
+.properties
 
 ### STS ###
 .apt_generated
