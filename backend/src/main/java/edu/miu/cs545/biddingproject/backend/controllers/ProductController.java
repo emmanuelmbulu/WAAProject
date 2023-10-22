@@ -31,15 +31,10 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public List<Product> getAllProducts(@RequestParam(name = "filter") String filter) {
-        if(filter == null || filter.isEmpty()) return new ArrayList<>();
+    public List<Product> getAllProducts(@RequestParam(name = "filter", required = false) String filter) {
+        if(filter == null || filter.isEmpty()) return service.getAllProductsAvailableForBidding();
         if("all".equalsIgnoreCase(filter)) return service.getAllProducts();
         return new ArrayList<>();
-    }
-
-    @GetMapping("")
-    public  List<Product> getAllProductsAvailableForBidding() {
-        return service.getAllProductsAvailableForBidding();
     }
 
     @PostMapping("")
