@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { BidService } from "../services/bid-service";
 // import GlobalContext from "./core/context";
+import bidData from "../data/bidData";
 export default function Bid() {
   const [bid, setBid] = useState({ amount: 0 });
 
@@ -10,7 +11,7 @@ export default function Bid() {
       alert("put a valid amount");
     } else {
       const price = bid.amount;
-      const bidData = { productId: 1, price, customerId: 1 };
+      const bidData = bidData(1, price, 1);
       BidService.putBid(bidData);
     }
   };
