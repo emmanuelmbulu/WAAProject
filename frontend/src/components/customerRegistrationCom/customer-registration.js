@@ -1,28 +1,62 @@
-import {useRef} from "react";
 import {CustomerService} from "../../service/customer-service";
-import {Customer} from "../../models/customer";
+import CustomerData from "../../data/customer-data";
+import {useState} from "react";
+
 
 
 export default function CustomerRegistrationComponent(){
 
-    const input1 = useRef();
-    const input2 = useRef();
-    const input3 = useRef();
-    const input4 = useRef();
+    const [customerObject, setCustomerObject] = useState({
+        firstName: "",
+        lastName: "",
+        passWord: "",
+        email: "",
+        licenseNumber: ""
+    });
+
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [errorOccurred, setErrorOccurred] = useState({gotError: false, errorMessage: ''});
+
 
     const signup = (event) => {
-        event.preventDefault(true);
-        const customer = new Customer(input1.current.value, input2.current.value, input3.current.value, input4.current.value);
-        console.log(customer);
-        //CustomerService.addCustomer(customer);
+        (async() => {
+            try {
+                event.preventDefault(true);
+                const customer = new CustomerData(
+                    customerObject.firstName,
+                    customerObject.lastName,
+                    customerObject.passWord,
+                    customerObject.email,
+                    customerObject.licenseNumber);
+
+                //console.log(customer);
+                const response = await CustomerService.addCustomer(customer);
+            } catch (err){
+                console.log(err);
+                setErrorOccurred({gotError:true, errorMessage: err.message});
+            }
+        })();
     }
+
+    const setValue = (event) => {
+        const input = event.target;
+        setCustomerObject({...customerObject, [input.name]: input.value});
+    };
+
     return(
         <div>
+            {errorOccurred.gotError && <p>{errorOccurred.errorMessage}</p>}
             <form>
-                <input ref={input1} placeholder={"Name"}/>
-                <input ref={input2} type={"password"}  placeholder={"Password"}/>
-                <input ref={input3} placeholder={"E-mail Address"}/>
-                <input ref={input4} placeholder={"License Number"}/>
+                <input name='firstName' onChange={setValue}
+                       value={customerObject.firstName} placeholder={"First Name"}/>
+                <input name='lastName'  onChange={setValue}
+                       value={customerObject.lastName}  placeholder={"Last Name"}/>
+                <input type={"password"} name='password' onChange={setValue}
+                       value={customerObject.passWord}  placeholder={"Password"}/>
+                <input name='email' onChange={setValue}
+                       value={customerObject.email}  placeholder={"E-mail Address"}/>
+                <input name='licenseNumber'  onChange={setValue}
+                       value={customerObject.licenseNumber}  placeholder={"License Number"}/>
                 <button onClick={signup}>SignUp</button>
 
             </form>
