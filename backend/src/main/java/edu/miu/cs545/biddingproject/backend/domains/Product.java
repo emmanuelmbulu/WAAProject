@@ -19,6 +19,7 @@ public class Product {
     @Embedded
     private BiddingPrice biddingPrice;
     private boolean isSavedWithRelease = false;
+    private double depositAmount;
 
     @ManyToOne @JoinColumn(name = "seller_id")
     private Seller seller;

@@ -6,6 +6,8 @@ import edu.miu.cs545.biddingproject.backend.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     final private ProductRepository repository;
@@ -17,5 +19,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getOneById(Long id) {
         return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        return repository.findAll();
     }
 }
