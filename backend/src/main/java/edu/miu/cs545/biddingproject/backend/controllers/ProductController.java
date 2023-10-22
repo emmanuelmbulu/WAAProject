@@ -51,7 +51,7 @@ public class ProductController {
                 .name(data.getName())
                 .depositAmount(data.getDepositAmount())
                 .seller(seller)
-                .isSavedWithRelease(data.isSavedWithRelease())
+                .savedWithRelease(data.isSavedWithRelease())
                 .build();
         product = service.save(product);
         return ResponseEntity.ok(product);
