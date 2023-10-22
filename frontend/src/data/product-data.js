@@ -1,6 +1,6 @@
 
-export default function(id, name, description, price, endingTime, paymentDueDate, isSavedWithRelease, sellerId){
-    this.id = id;
+export default function(name, description, price, endingTime, paymentDueDate, isSavedWithRelease, sellerId){
+
     this.name = name;
     this.description = description;
     this.biddingPrice = {

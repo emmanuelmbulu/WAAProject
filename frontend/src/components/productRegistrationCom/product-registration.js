@@ -9,7 +9,6 @@ export default function ProductRegistrationComponent(){
         price: "",
         endingTime: "",
         paymentDueDate: "",
-        isSavedWithRelease: "",
         sellerId: ""
     });
 
@@ -28,7 +27,7 @@ export default function ProductRegistrationComponent(){
                     productObject.price,
                     productObject.endingTime,
                     productObject.paymentDueDate,
-                    productObject.isSavedWithRelease,
+                    true,
                     productObject.sellerId
                 )
                 console.log(product)
@@ -52,13 +51,16 @@ export default function ProductRegistrationComponent(){
             {errorOccurred.gotError && <p>errorOccurred.errorMessage</p>}
             <form>
                 <input name='name' onChange={setValues}  value={productObject.name} placeholder={'Product Name'}/>
-                <input name = 'description' onChange={setValues} value={productObject.description} placeholder={'Description'}/>
+                <textarea name = 'description' onChange={setValues} placeholder={'Description'}>
+                    {productObject.description}
+                </textarea>
                 <input name = 'price' onChange={setValues} value={productObject.price} placeholder={'Price'}/>
-                <input name = 'endingTime' onChange={setValues} value={productObject.endingTime} placeholder={'Ending Date'}/>
-                <input name = 'paymentDueDate' onChange={setValues} value={productObject.paymentDueDate} placeholder={'Payment Due Date'}/>
-                <input name = 'isSavedWithRelease' onChange={setValues} value={productObject.isSavedWithRelease}  placeholder={'Saved with Release'}/>
+                <input type='datetime-local' name = 'endingTime' onChange={setValues} value={productObject.endingTime} placeholder={'Ending Date'}/>
+                <input type='datetime-local' name = 'paymentDueDate' onChange={setValues} value={productObject.paymentDueDate} placeholder={'Payment Due Date'}/>
                 <input name = 'sellerId' onChange={setValues} value={productObject.sellerId} placeholder={'Seller ID'}/>
+                <input type='file' />
                 <button onClick={registerProduct}>Register Product</button>
+
             </form>
         </div>
     )
