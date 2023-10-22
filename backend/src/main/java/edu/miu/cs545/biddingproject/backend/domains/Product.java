@@ -18,7 +18,7 @@ public class Product {
     private String description;
     @Embedded
     private BiddingPrice biddingPrice;
-    private boolean isSavedWithRelease = false;
+    private boolean savedWithRelease = false;
     private double depositAmount;
 
     @ManyToOne @JoinColumn(name = "seller_id")
