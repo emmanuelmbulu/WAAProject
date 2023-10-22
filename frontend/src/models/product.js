@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 export class Product{
     constructor(id, name, description, price, endingTime, paymentDueDate, isSavedWithRelease, deposit) {
         this.id = id;
@@ -20,13 +18,3 @@ export class Product{
         )
     }
 }
-=======
-export default class Product {
-  constructor(name, description, biddingPrice, isSavedWithRelease) {
-    this.name = name;
-    this.description = description;
-    this.biddingPrice = biddingPrice;
-    this.isSavedWithRelease = isSavedWithRelease;
-  }
-}
->>>>>>> origin/kaliebranch

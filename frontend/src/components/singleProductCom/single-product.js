@@ -31,7 +31,7 @@ export default function SingleProduct(props) {
     useEffect(() => {
         (async () => {
             try {
-                const response = await BidService.getDeposit(customerId, product.id);
+                const response = await BidService.putBid();
                 setHasBid(true);
                 setHighestBid(response.data);
             } catch (err) {
