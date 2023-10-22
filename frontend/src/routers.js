@@ -5,6 +5,7 @@ import Layout from "./components/layout";
 import SellerSignup from "./components/seller-signup";
 import Bid from "./components/bid";
 import ProductRegistrationComponent from "./components/productRegistrationCom/product-registration";
+import ProductList from "./components/productList";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/bids", element: <Bid /> },
       { path: "/sellers", element: <SellerSignup /> },
       { path: "/products", element: <ProductRegistrationComponent /> },
+      { path: "/productList", element: <ProductList /> },
     ],
   },
 ]);
