@@ -1,5 +1,6 @@
 package edu.miu.cs545.biddingproject.backend.controllers;
 
+import edu.miu.cs545.biddingproject.backend.domains.Bid;
 import edu.miu.cs545.biddingproject.backend.domains.Product;
 import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewProduct;
@@ -71,16 +72,13 @@ public class ProductController {
         return ResponseEntity.ok(bidService.getAllBidsByProduct(product));
     }
 
-    @GetMapping("/{id}/bids")
-    public ResponseEntity<?> getTheLatestBidForProduct(@PathVariable Long id,
-                                                       @RequestParam(name = "filter") String filter) {
+    @GetMapping("/{id}/bids/latest")
+    public ResponseEntity<?> getTheLatestBidForProduct(@PathVariable Long id) {
         Product product = service.getOneById(id);
         if(product == null) return ResponseEntity.notFound().build();
 
-        if(filter == null || filter.isEmpty()) return ResponseEntity.ok(bidService.getAllBidsByProduct(product));
-        if("latest".equalsIgnoreCase(filter)) {
-            return ResponseEntity.ok(bidService.getTheLatestBidByProduct(product));
-        }
-        return ResponseEntity.noContent().build();
+        Bid latestBid = bidService.getTheLatestBidByProduct(product);
+        if(latestBid == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(latestBid);
     }
 }
