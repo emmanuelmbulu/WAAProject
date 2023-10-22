@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,8 +30,15 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public List<Product> getAllProducts() {
-        return service.getAllProducts();
+    public List<Product> getAllProducts(@RequestParam(name = "filter") String filter) {
+        if(filter == null || filter.isEmpty()) return new ArrayList<>();
+        if("all".equalsIgnoreCase(filter)) return service.getAllProducts();
+        return new ArrayList<>();
+    }
+
+    @GetMapping("")
+    public  List<Product> getAllProductsAvailableForBidding() {
+        return service.getAllProductsAvailableForBidding();
     }
 
     @PostMapping("")

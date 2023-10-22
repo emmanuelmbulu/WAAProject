@@ -10,4 +10,5 @@ public interface ProductService {
     Product save(Product p);
     Product getOneById(Long id);
     List<Product> getAllProducts();
+    List<Product> getAllProductsAvailableForBidding();
 }
