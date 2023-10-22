@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {PaymentService} from "../../service/payment-service";
 import BidData from "../../data/bidData";
 import {BidService} from "../../services/bid-service";
@@ -20,13 +20,8 @@ export default function SingleProduct(props) {
     const [timeLeft, setTimeLeft] = useState(timeDifference);
     const [hasBid, setHasBid] = useState(false);
     const [highestBid, setHighestBid] = useState(null);
-    const bidData = new BidData(product.id, amount, customerId);
-    const [amount, setAmount] = useState({amount:""});
 
-
-
-
-
+    const amountInput = useRef();
 
     useEffect(() => {
         (async () => {
@@ -52,6 +47,17 @@ export default function SingleProduct(props) {
     });
 
    const setPrice = () => {
+       let currentPrice = product.biddingPrice.price;
+       if(hasBid){
+           currentPrice = highestBid.price;
+       }
+       const amt = amountInput.current.value;
+       if(amt < currentPrice){
+           alert("Amount entered can not be lower than the stated product price");
+       } else{
+           const bidData = new BidData(product.id, amountInput.current.value, customerId);
+           BidService.putBid(bidData);
+       }
 
    }
 
@@ -113,7 +119,7 @@ export default function SingleProduct(props) {
                                     <label htmlFor="amount" className="col-form-label">Enter Amount: </label>
                                 </div>
                                 <div className="col-auto">
-                                    <input  value='amount' type="text" id="amount" className="form-control" placeholder='Amount' />
+                                    <input ref={amountInput} type="text" id="amount" className="form-control" placeholder='Amount' />
                                 </div>
                             </div>
                             <div className="modal-footer">
