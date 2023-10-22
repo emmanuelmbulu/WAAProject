@@ -1,5 +1,6 @@
 package edu.miu.cs545.biddingproject.backend.controllers;
 
+import edu.miu.cs545.biddingproject.backend.domains.Bid;
 import edu.miu.cs545.biddingproject.backend.domains.Product;
 import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewProduct;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,8 +31,15 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public List<Product> getAllProducts() {
-        return service.getAllProducts();
+    public List<Product> getAllProducts(@RequestParam(name = "filter") String filter) {
+        if(filter == null || filter.isEmpty()) return new ArrayList<>();
+        if("all".equalsIgnoreCase(filter)) return service.getAllProducts();
+        return new ArrayList<>();
+    }
+
+    @GetMapping("")
+    public  List<Product> getAllProductsAvailableForBidding() {
+        return service.getAllProductsAvailableForBidding();
     }
 
     @PostMapping("")
@@ -63,16 +72,13 @@ public class ProductController {
         return ResponseEntity.ok(bidService.getAllBidsByProduct(product));
     }
 
-    @GetMapping("/{id}/bids")
-    public ResponseEntity<?> getTheLatestBidForProduct(@PathVariable Long id,
-                                                       @RequestParam(name = "filter") String filter) {
+    @GetMapping("/{id}/bids/latest")
+    public ResponseEntity<?> getTheLatestBidForProduct(@PathVariable Long id) {
         Product product = service.getOneById(id);
         if(product == null) return ResponseEntity.notFound().build();
 
-        if(filter == null || filter.isEmpty()) return ResponseEntity.ok(bidService.getAllBidsByProduct(product));
-        if("latest".equalsIgnoreCase(filter)) {
-            return ResponseEntity.ok(bidService.getTheLatestBidByProduct(product));
-        }
-        return ResponseEntity.noContent().build();
+        Bid latestBid = bidService.getTheLatestBidByProduct(product);
+        if(latestBid == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(latestBid);
     }
 }

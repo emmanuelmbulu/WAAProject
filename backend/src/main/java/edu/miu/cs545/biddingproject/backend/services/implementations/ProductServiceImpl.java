@@ -25,4 +25,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         return repository.findAll();
     }
+
+    @Override
+    public List<Product> getAllProductsAvailableForBidding() {
+        return repository.findAllAvailableForBidding();
+    }
 }
