@@ -51,17 +51,22 @@ export default function SingleProduct(props) {
        if(hasBid){
            currentPrice = highestBid.price;
        }
-       const amt = amountInput.current.value;
+       const amt = parseFloat(amountInput.current.value);
        if(amt < currentPrice){
            alert("Amount entered can not be lower than the stated product price");
-       } else{
-           const bidData = new BidData(product.id, amountInput.current.value, customerId);
-           BidService.putBid(bidData);
+       } else {
+           (async () => {
+               try {
+                   const bidData = new BidData(product.id, amt, customerId);
+                   BidService.putBid(bidData);
+               } catch (err) {
+                   alert("The amount entered has already been taken")
+               }
+           })();
+
        }
 
    }
-
-
 
     const timeToString = (time) => {
         function formatTime(t) {
