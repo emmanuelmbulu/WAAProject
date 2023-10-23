@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useRef, useState} from "react";
 import ProductData from "../../data/product-data";
 import {ProductService} from "../../service/product-service";
 
@@ -17,6 +17,8 @@ export default function ProductRegistrationComponent(){
     const [errorOccurred, setErrorOccurred] = useState({
         gotError: false, errorMessage:""
     });
+
+    const imageInput = useRef();
 
     const saveWithRelease = (event) => {
         event.preventDefault(true);
@@ -43,6 +45,11 @@ export default function ProductRegistrationComponent(){
                 )
                 console.log(product)
                 const response = await ProductService.addProduct(product);
+                const formData = new FormData();
+                formData.append('file', imageInput.current.files[0]);
+
+                await ProductService.uploadImage(formData, response.data.id);
+                alert('Product saved successfully');
 
             }catch(err){
                 setErrorOccurred({gotError: true, errorMessage: err.message});
@@ -99,7 +106,12 @@ export default function ProductRegistrationComponent(){
                     onChange={setValues}
                     value={productObject.sellerId}
                     placeholder={'Seller ID'}/>
-                <input type='file' image />
+                <input
+                    type='file'
+                    id='imageFile'
+                    ref={imageInput}
+                    />
+
                 <button onClick={saveWithRelease}>Save with release</button>
                 <button onClick={saveWithoutRelease}>Save without release</button>
 
