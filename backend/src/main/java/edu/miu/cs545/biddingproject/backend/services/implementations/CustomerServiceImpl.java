@@ -16,4 +16,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer c) {
         return repository.save(c);
     }
+
+    @Override
+    public Customer getOneById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
 }
