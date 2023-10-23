@@ -1,10 +1,6 @@
 import { useState } from "react";
 import ProductData from "../../data/product-data";
-<<<<<<< HEAD
-import {ProductService} from "../../services/product-service";
-=======
 import { ProductService } from "../../services/product-service";
->>>>>>> origin/kaliebranch
 
 export default function ProductRegistrationComponent() {
   const [productObject, setProductObject] = useState({

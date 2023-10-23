@@ -10,7 +10,7 @@ export default function SideBar() {
                 <Link className="nav-link dropdown-toggle"
                       data-bs-toggle="dropdown"
                       to={"#"} role="button"
-                      aria-expanded="false">My Products</Link>
+                      aria-expanded="false">Products</Link>
                 <ul className="dropdown-menu">
                     <li>
                         <Link className="dropdown-item" to={'/products'}>My products</Link>
