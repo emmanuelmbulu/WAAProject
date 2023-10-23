@@ -15,7 +15,7 @@ export default function Login() {
 
   return (
     <div>
-      <h1>Welcome to bid</h1>
+      <h1>Welcome to the bidding system</h1>
       <input
         type="text"
         value={user.email}
