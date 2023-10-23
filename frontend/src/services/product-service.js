@@ -12,5 +12,11 @@ export const ProductService = {
   },
   uploadImage: (image, productId) => {
     return axiosInstance.post(`products/${productId}`, image)
+  },
+  getProduct: (productId) => {
+    return axiosInstance.get(`products/${productId}`)
+  },
+  updateProduct: (productId, product) => {
+    return axiosInstance.put(`/products/${productId}`, product)
   }
 };
