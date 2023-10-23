@@ -8,6 +8,9 @@ export const ProductService = {
     return axiosInstance.get("/products");
   },
   getLatestBid: (productId) => {
-    return axiosInstance.get(`/products/${productId}/bids?filter=latest`);
+    return axiosInstance.get(`/products/${productId}/bids/latest`);
   },
+  uploadImage: (image, productId) => {
+    return axiosInstance.post(`products/${productId}`, image)
+  }
 };
