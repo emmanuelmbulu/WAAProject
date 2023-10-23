@@ -10,6 +10,7 @@ export default function ProductList() {
       try {
         console.log("Fetching....");
         const response = await ProductService.getAllProducts();
+        console.log(response);
         setProducts(response.data);
       } catch (exception) {
         setProducts([]);
@@ -20,7 +21,7 @@ export default function ProductList() {
   return (
     <div>
       {products.map((p) => (
-        <SingleProduct item={p} customer={1} />
+        <SingleProduct key={p.id} item={p} customer={1} />
       ))}
     </div>
   );

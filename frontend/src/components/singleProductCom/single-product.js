@@ -5,6 +5,28 @@ import { BidService } from "../../services/bid-service";
 import { Product } from "../../models/product";
 import { ProductService } from "../../services/product-service";
 
+function timeToString(time) {
+  function formatTime(t) {
+    if (t <= 9) return "0" + t;
+    return t;
+  }
+
+  const seconds = Math.floor(time / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  const remainingHours = hours % 24;
+  const remainingMinutes = minutes % 60;
+  const remainingSeconds = seconds % 60;
+
+  return `${formatTime(days)} days : ${formatTime(
+    remainingHours
+  )} hh : ${formatTime(remainingMinutes)} min : ${formatTime(
+    remainingSeconds
+  )} sec`;
+}
+
 export default function SingleProduct(props) {
   const product = props.item;
   const customerId = props.customer;
@@ -15,7 +37,6 @@ export default function SingleProduct(props) {
   const [timeLeft, setTimeLeft] = useState(timeDifference);
   const [hasBid, setHasBid] = useState(false);
   const [highestBid, setHighestBid] = useState(null);
-  const bidData = new BidData(product.id, amount, customerId);
   const [amount, setAmount] = useState({ amount: "" });
 
   useEffect(() => {
@@ -30,7 +51,7 @@ export default function SingleProduct(props) {
         setCanBid(false);
       }
     })();
-  });
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -38,6 +59,7 @@ export default function SingleProduct(props) {
         const response = await ProductService.getLatestBid(product.id);
         setHasBid(true);
         setHighestBid(response.data);
+        console.log("data is ", response);
       } catch (err) {
         setHasBid(false);
       }
@@ -46,27 +68,12 @@ export default function SingleProduct(props) {
 
   const setPrice = () => {};
 
-  const timeToString = (time) => {
-    function formatTime(t) {
-      if (t <= 9) return "0" + t;
-      return t;
-    }
-
-    const days = Math.floor(time / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(time / (1000 * 60 * 60));
-    const minutes = Math.floor(time / (1000 * 60));
-    const seconds = Math.floor(time / 1000);
-
-    return `${formatTime(days)} days : ${formatTime(hours)} hh : ${formatTime(
-      minutes
-    )} min : ${formatTime(seconds)} sec`;
-  };
-
   useEffect(() => {
-    setInterval(() => {
-      setTimeLeft(timeLeft - 1);
+    const timerId = setInterval(() => {
+      setTimeLeft(timeLeft - 1000);
     }, 1000);
-  });
+    return () => clearInterval(timerId);
+  }, [timeLeft]);
 
   return (
     <div>
