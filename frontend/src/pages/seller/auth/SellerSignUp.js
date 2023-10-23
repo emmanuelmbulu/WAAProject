@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {SellerService} from "../../../services/seller-service";
-import ErrorNotification from "../../../components/error-notification/ErrorNotification";
+import ErrorNotification from "../../../components/shared/error-notification/ErrorNotification";
 import signupImage from '../auth/img/seller-signup.jpeg';
 
 export default function SellerSignUp() {

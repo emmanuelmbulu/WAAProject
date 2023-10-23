@@ -10,6 +10,7 @@ import CustomerRegistrationComponent from "./components/customerRegistrationCom/
 import AddProductPage from "./pages/seller/product/AddProductPage";
 import WinnerList from "./components/winnerList";
 import SellerSignUp from "./pages/seller/auth/SellerSignUp";
+import CustomerSignUp from "./pages/customer/auth/CustomerSignUp";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,7 +25,9 @@ const router = createBrowserRouter([
       { path: "/winners", element: <WinnerList /> },
       { path: "/customers", element: <CustomerRegistrationComponent /> },
       { path: '/seller/products/add-product', element: <AddProductPage />},
-      {path: '/seller/sign-up', element: <SellerSignUp /> }
+      {path: '/seller/sign-up', element: <SellerSignUp /> },
+
+      {path: '/sign-up', element: <CustomerSignUp />}
     ],
   },
 ]);

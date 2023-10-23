@@ -1,10 +1,10 @@
 import Navbar from "../shared/Navbar";
-import Footer from "../../customer/shared/Footer";
+import Footer from "../../../components/shared/Footer";
 import SideBar from "../shared/SideBar";
 import {useRef, useState} from "react";
 import ProductData from "../../../data/product-data";
 import {ProductService} from "../../../services/product-service";
-import ErrorNotification from "../../../components/error-notification/ErrorNotification";
+import ErrorNotification from "../../../components/shared/error-notification/ErrorNotification";
 import {useNavigate} from "react-router-dom";
 
 export default function AddProductPage() {
@@ -72,7 +72,6 @@ export default function AddProductPage() {
                 const formData = new FormData();
                 formData.append('file', imageInput.current.files[0]);
                 const response = await ProductService.uploadImage(formData, productId);
-                console.log("upload response is ", response);
             } catch (ex) {
                 console.log("Uploading... ", ex);
             }
