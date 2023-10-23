@@ -10,4 +10,15 @@ export const ProductService = {
   getLatestBid: (productId) => {
     return axiosInstance.get(`/products/${productId}/bids/latest`);
   },
+  uploadImage: (image, productId) => {
+    return axiosInstance.post(`products/${productId}`, image, {
+      headers: {'Content-Type':'multipart/form-data'}
+    })
+  },
+  getProduct: (productId) => {
+    return axiosInstance.get(`products/${productId}`)
+  },
+  updateProduct: (productId, product) => {
+    return axiosInstance.put(`/products/${productId}`, product)
+  }
 };

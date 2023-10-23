@@ -1,5 +1,5 @@
 import Navbar from "./shared/Navbar";
-import Footer from "./shared/Footer";
+import Footer from "../../components/shared/Footer";
 
 export default function BiddingPage({children}) {
     return (
