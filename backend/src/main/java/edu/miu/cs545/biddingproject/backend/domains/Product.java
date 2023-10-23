@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.domains;
 
 import edu.miu.cs545.biddingproject.backend.values.BiddingPrice;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,8 @@ public class Product {
     private BiddingPrice biddingPrice;
     private boolean savedWithRelease = false;
     private double depositAmount;
+    @Column(nullable = true)
+    private String pictureUri;
 
     @ManyToOne @JoinColumn(name = "seller_id")
     private Seller seller;
