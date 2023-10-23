@@ -2,9 +2,7 @@ import { axiosInstance } from "../config/axios-config";
 
 export const ProductService = {
   addProduct: (product) => {
-    return axiosInstance.post("/products", product, {
-      headers: {'Content-Type':'application/json'}
-    });
+    return axiosInstance.post("/products", product);
   },
   getAllProducts: () => {
     return axiosInstance.get("/products");
