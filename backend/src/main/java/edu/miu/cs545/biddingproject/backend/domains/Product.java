@@ -3,14 +3,11 @@ package edu.miu.cs545.biddingproject.backend.domains;
 import edu.miu.cs545.biddingproject.backend.values.BiddingPrice;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor @NoArgsConstructor
-@Data @Builder
+@Data @Builder @ToString
 public class Product {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

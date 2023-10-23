@@ -6,18 +6,18 @@ import SingleProductForBidding from "../../../components/bidding/single-product-
 
 export default function Bidding() {
     const [products, setProducts] = useState([]);
-    let productLength = 0;
+    const [productLength, setProductLength] = useState(0);
 
     useEffect(() => {
         (async () => {
             try {
                 const response = await ProductService.getAllProducts();
                 if(response.data.length !== productLength) {
-                    productLength = response.data.length;
+                    setProductLength(response.data.length);
                     setProducts(response.data);
                 }
             } catch (exception) {
-                setProducts([]);
+                if(productLength === 0) setProducts([]);
             }
         })();
     });

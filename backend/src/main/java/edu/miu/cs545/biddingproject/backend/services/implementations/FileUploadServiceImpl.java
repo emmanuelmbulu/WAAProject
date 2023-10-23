@@ -49,7 +49,7 @@ public class FileUploadServiceImpl implements FileUploadService {
                 .path("/images/").path(timeStampedFileName).toUriString();
 
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/file/download/").path(timeStampedFileName).toUriString();
+                .path("/files/").path(timeStampedFileName).toUriString();
 
         //FileDetails fileDetails = new FileDetails(file.getOriginalFilename(), fileUri, fileDownloadUri, file.getSize(), uploaderName);
 
@@ -77,5 +77,10 @@ public class FileUploadServiceImpl implements FileUploadService {
         } catch (MalformedURLException ex) {
             throw new FileNotFoundException("File not found " + fileName);
         }
+    }
+
+    @Override
+    public Path getUploadPath() {
+        return UPLOAD_PATH;
     }
 }

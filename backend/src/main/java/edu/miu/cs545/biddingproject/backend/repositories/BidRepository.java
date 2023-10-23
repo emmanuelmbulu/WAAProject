@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface BidRepository extends JpaRepository<Bid, Long> {
     List<Bid> findAllByProductId(Long productId);
 
-    @Query("select b from Bid b where b.product.id = ?1 order by b.createdAt desc limit 1")
+    @Query("select b from Bid b where b.product.id = ?1 order by b.id desc limit 1")
     Optional<Bid> findTheLatestBidByProduct(Long productId);
 }

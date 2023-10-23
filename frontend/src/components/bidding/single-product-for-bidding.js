@@ -54,10 +54,12 @@ export default function SingleProductForBidding(props) {
         (async () => {
             try {
                 const response = await ProductService.getLatestBid(product.id);
-                setHasBid(true);
-                setHighestBid(response.data);
+                if(!highestBid || response.data.id !== highestBid.id) {
+                    setHasBid(true);
+                    setHighestBid(response.data);
+                }
             } catch (err) {
-                setHasBid(false);
+                if(highestBid === null) setHasBid(false);
             }
         })();
     });
@@ -125,15 +127,17 @@ export default function SingleProductForBidding(props) {
                         </li>
                     </ul>
                     <div className={'card-body'}>
-                        {canBid && <button
-                            className="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target={"#modalBidProduct" + product.id}>BID NOW</button>}
+                        <div className={'row ps-2 pe-2'}>
+                            {canBid && <button
+                                className="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target={"#modalBidProduct" + product.id}>BID NOW</button>}
 
-                        {!canBid && <button className={'btn btn-secondary'}
-                                            data-bs-toggle="modal"
-                                            data-bs-target={"#modalStartBidding" + product.id}
-                        >START BIDDING</button>}
+                            {!canBid && <button className={'btn btn-secondary'}
+                                                data-bs-toggle="modal"
+                                                data-bs-target={"#modalStartBidding" + product.id}
+                            >START BIDDING</button>}
+                        </div>
                     </div>
                 </div>
             </div>

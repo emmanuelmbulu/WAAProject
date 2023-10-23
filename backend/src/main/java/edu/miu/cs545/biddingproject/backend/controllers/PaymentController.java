@@ -67,17 +67,17 @@ public class PaymentController {
         Product product = productService.getOneById(data.getProductId());
         if(product == null) return ResponseEntity.notFound().build();
 
-        if(data.getAmount() == 0) return ResponseEntity.badRequest()
+        /*if(data.getAmount() == 0) return ResponseEntity.badRequest()
                 .body(ApiBodyForError.builder()
                         .code(1).message("Please provide the deposit amount paid."));
 
         if(product.getDepositAmount() > data.getAmount()) return ResponseEntity.badRequest()
                 .body(ApiBodyForError.builder()
-                        .code(1).message("Sorry, the deposit amount provided is not enough."));
+                        .code(1).message("Sorry, the deposit amount provided is not enough."))*/;
 
         Payment payment = Payment.builder()
                 .paymentType(PaymentType.DEPOSIT)
-                .amount(data.getAmount())
+                .amount(product.getDepositAmount())
                 .customer(customer)
                 .payedAt(LocalDate.now())
                 .product(product)
