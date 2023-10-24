@@ -32,11 +32,14 @@ export default function BidsHistory() {
                         <hr />
                     </div>
                     <div className={'row'}>
-                        <div className={'list-group'}>
-                            {bids.map((b) => (
-                                <SingleBidCustomerSide key={b.id} item={b} />
-                            ))}
+                        <div className={'col-md-7 col-sm-12'}>
+                            <div className={'list-group'}>
+                                {bids.map((b) => (
+                                    <SingleBidCustomerSide key={b.id} item={b} />
+                                ))}
+                            </div>
                         </div>
+
                         {!bidsLength && <div className="alert alert-info" role="alert">
                             Sorry, we did not find any bids made by you!
                         </div>}

@@ -4,28 +4,10 @@ import BidData from "../../data/bidData";
 import {BidService} from "../../services/bid-service";
 import {PaymentService} from "../../services/payment-service";
 import JavaDatetimeToDate from "../../utils/java-datetime-to-date";
+import TimerToString from "../../utils/timer-to-string";
+import {Link} from "react-router-dom";
 
-function timeToString(time) {
-    function formatTime(t) {
-        if (t <= 9) return "0" + t;
-        return t;
-    }
 
-    const seconds = Math.floor(time / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    const remainingHours = hours % 24;
-    const remainingMinutes = minutes % 60;
-    const remainingSeconds = seconds % 60;
-
-    return `${formatTime(days)} days : ${formatTime(
-        remainingHours
-    )} hh : ${formatTime(remainingMinutes)} min : ${formatTime(
-        remainingSeconds
-    )} sec`;
-}
 
 export default function SingleProductForBidding(props) {
     const product = props.item;
@@ -115,7 +97,7 @@ export default function SingleProductForBidding(props) {
                 <div className="card h-100">
                     <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>
                     <div className="card-body">
-                        <h5 className="card-title">{product.name}</h5>
+                        <h5 className="card-title"><Link className={'text-decoration-none'} to={'/bidding/' + product.id}>{product.name}</Link></h5>
                     </div>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">
@@ -123,8 +105,8 @@ export default function SingleProductForBidding(props) {
                             {!hasBid && <p className={'card-text'}>Actual price: <mark>${product.biddingPrice.price}</mark></p>}
                         </li>
                         <li className="list-group-item">
-                            {(timeLeft <= (48 * 60 * 60000)) && <small><strong className="text-danger">{timeToString(timeLeft)}</strong></small>}
-                            {(timeLeft > (48 * 60 * 60000)) && <small><strong className="text-success">{timeToString(timeLeft)}</strong></small>}
+                            {(timeLeft <= (48 * 60 * 60000)) && <small><strong className="text-danger">{TimerToString(timeLeft)}</strong></small>}
+                            {(timeLeft > (48 * 60 * 60000)) && <small><strong className="text-success">{TimerToString(timeLeft)}</strong></small>}
                         </li>
                     </ul>
                     <div className={'card-body'}>
