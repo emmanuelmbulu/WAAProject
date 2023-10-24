@@ -1,5 +1,4 @@
 import Navbar from "./shared/Navbar";
-import SingleProductForBidding from "../../components/bidding/single-product-for-bidding";
 import Footer from "../../components/shared/Footer";
 import React, {useEffect, useRef, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
@@ -10,7 +9,7 @@ import {BidService} from "../../services/bid-service";
 import TimerToString from "../../utils/timer-to-string";
 import JavaDatetimeToDate from "../../utils/java-datetime-to-date";
 
-export default function ProductDetailsPage(props) {
+export default function BiddingProductPage(props) {
     const params = useParams();
 
     const customerId = 1;
