@@ -9,13 +9,16 @@ export default function Winner(props) {
 
   return (
     <div>
-      <h1>Product name:{product.name}</h1>
-      <h1>Product price:{product.price}</h1>
-
-      <h3>Winner first name:{winner.name.firstName}</h3>
-      <h3>Winner last name:{winner.name.lastName}</h3>
-      <div>Total bids:{bids.total}</div>
-      <div>Final bid:{bids.finalPrice}</div>
+      <div className="card" style={{ width: "18rem" }}>
+        <img src={product.pictureUri} className="card-img-top" alt="..." />
+        <div className="card-body">
+          <h5 className="card-title">{product.name}</h5>
+          <h5 className="card-title">Winner Name: {winner.name.firstName}</h5>
+          <p className="card-text">Product price:{product.price}</p>
+          <p className="card-text">Total bids:{bids.total}</p>
+          <p className="card-text">Bid price:{bids.total}</p>
+        </div>
+      </div>
     </div>
   );
 }

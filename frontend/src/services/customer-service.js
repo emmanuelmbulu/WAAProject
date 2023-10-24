@@ -1,7 +1,12 @@
-import {axiosInstance} from "../config/axios-config";
+import { axiosInstance } from "../config/axios-config";
 
 export const CustomerService = {
-    addCustomer: (customer) => {
-        return axiosInstance.post("/customers", customer);
-    }
-}
+  addCustomer: (customer) => {
+    const token = Cookies.get("token");
+    return axiosInstance.post("/customers", customer, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+};

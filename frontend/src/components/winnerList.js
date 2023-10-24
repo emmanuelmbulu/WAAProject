@@ -37,6 +37,74 @@ const allWinners = [
       finalPrice: 130,
     },
   },
+  {
+    id: 1,
+    product: {
+      name: "Product 1",
+      price: 100,
+    },
+    winner: {
+      name: {
+        firstName: "John",
+        lastName: "Doe",
+      },
+    },
+    bids: {
+      total: 10,
+      finalPrice: 90,
+    },
+  },
+  {
+    id: 1,
+    product: {
+      name: "Product 1",
+      price: 100,
+    },
+    winner: {
+      name: {
+        firstName: "John",
+        lastName: "Doe",
+      },
+    },
+    bids: {
+      total: 10,
+      finalPrice: 90,
+    },
+  },
+  {
+    id: 1,
+    product: {
+      name: "Product 1",
+      price: 100,
+    },
+    winner: {
+      name: {
+        firstName: "John",
+        lastName: "Doe",
+      },
+    },
+    bids: {
+      total: 10,
+      finalPrice: 90,
+    },
+  },
+  {
+    id: 1,
+    product: {
+      name: "Product 1",
+      price: 100,
+    },
+    winner: {
+      name: {
+        firstName: "John",
+        lastName: "Doe",
+      },
+    },
+    bids: {
+      total: 10,
+      finalPrice: 90,
+    },
+  },
 ];
 
 export default function WinnerList() {
@@ -57,9 +125,11 @@ export default function WinnerList() {
   console.log("all is ", allWinners);
 
   return (
-    <div>
+    <div className="row">
       {winners.map((w) => (
-        <Winner key={w.id} winnerData={w} />
+        <div className="col-md">
+          <Winner key={w.id} winnerData={w} />
+        </div>
       ))}
     </div>
   );
