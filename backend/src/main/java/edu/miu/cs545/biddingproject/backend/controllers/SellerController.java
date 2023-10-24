@@ -3,23 +3,24 @@ package edu.miu.cs545.biddingproject.backend.controllers;
 import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewSeller;
+import edu.miu.cs545.biddingproject.backend.services.ProductService;
 import edu.miu.cs545.biddingproject.backend.services.SellerService;
 import edu.miu.cs545.biddingproject.backend.values.Address;
 import edu.miu.cs545.biddingproject.backend.values.Name;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("sellers")
 public class SellerController {
     final private SellerService service;
+    final private ProductService productService;
 
-    public SellerController(@Qualifier("sellerServiceImpl") SellerService service) {
+    public SellerController(@Qualifier("sellerServiceImpl") SellerService service,
+                            ProductService productService) {
         this.service = service;
+        this.productService = productService;
     }
 
     @PostMapping("")
@@ -121,5 +122,13 @@ public class SellerController {
          */
         seller = service.save(seller);
         return ResponseEntity.ok(seller);
+    }
+
+    @GetMapping("{id}/products")
+    public ResponseEntity<?> getAllProductsForSeller(@PathVariable(name = "id") Long sellerId) {
+        Seller seller = service.getOneById(sellerId);
+        if(seller == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(productService.getAllProductsBySeller(seller));
     }
 }

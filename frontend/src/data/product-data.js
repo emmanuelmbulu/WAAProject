@@ -18,7 +18,7 @@ export default function(name, description, price, endingTime, paymentDueDate, is
             "endingTime":"${this.biddingPrice.endingTime}",
             "paymentDueDate":"${this.biddingPrice.paymentDueDate}"
             },
-            "isSavedWithRelease":"${this.isSavedWithRelease}",
+            "isSavedWithRelease":${this.isSavedWithRelease},
             "depositAmount":"${this.depositAmount}",
             "sellerId":${this.sellerId} 
             }`;

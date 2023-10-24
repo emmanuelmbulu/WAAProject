@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.services.implementations;
 
 import edu.miu.cs545.biddingproject.backend.domains.Product;
+import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.repositories.ProductRepository;
 import edu.miu.cs545.biddingproject.backend.services.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProductsAvailableForBidding() {
         return repository.findAllAvailableForBidding();
+    }
+
+    @Override
+    public List<Product> getAllProductsBySeller(Seller s) {
+        return repository.findAllBySellerId(s.getId());
     }
 }

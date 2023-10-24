@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.services;
 
 import edu.miu.cs545.biddingproject.backend.domains.Product;
+import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface ProductService {
     Product getOneById(Long id);
     List<Product> getAllProducts();
     List<Product> getAllProductsAvailableForBidding();
+    List<Product> getAllProductsBySeller(Seller s);
 }

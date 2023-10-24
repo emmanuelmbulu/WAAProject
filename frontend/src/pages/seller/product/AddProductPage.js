@@ -56,7 +56,7 @@ export default function AddProductPage() {
                 if(imageInput.current.files.length > 0) {
                     saveProductPicture(response.data.id);
                 }
-                //navigate('/seller/products');
+                navigate('/seller/products');
             } catch (exception) {
                 console.log("err is ", exception);
                 if(exception.response) {

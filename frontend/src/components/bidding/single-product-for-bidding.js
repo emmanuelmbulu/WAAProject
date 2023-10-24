@@ -111,7 +111,7 @@ export default function SingleProductForBidding(props) {
 
     return (
         <>
-            <div className="col">
+            <div className="col-md-3 col-sm-3 pb-3">
                 <div className="card h-100">
                     <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>
                     <div className="card-body">

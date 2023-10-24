@@ -11,8 +11,9 @@ import AddProductPage from "./pages/seller/product/AddProductPage";
 import WinnerList from "./components/winnerList";
 import SellerSignUp from "./pages/seller/auth/SellerSignUp";
 import CustomerSignUp from "./pages/customer/auth/CustomerSignUp";
-import Bidding from "./pages/customer/bidding";
 import BidsHistory from "./pages/customer/BidsHistory";
+import BiddingPage from "./pages/customer/BiddingPage";
+import ListProductsPage from "./pages/seller/product/ListProductsPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,11 +29,12 @@ const router = createBrowserRouter([
       { path: "/customers", element: <CustomerRegistrationComponent /> },
 
       {path: '/seller/products/add-product', element: <AddProductPage />},
+      {path: '/seller/products', element: <ListProductsPage />},
       {path: '/seller/sign-up', element: <SellerSignUp /> },
 
       {path: '/sign-up', element: <CustomerSignUp />},
       {path: '/sign-in'},
-      {path: '/bidding', element:<Bidding />},
+      {path: '/bidding', element:<BiddingPage />},
       {path: '/bids-history', element: <BidsHistory />}
     ],
   },
