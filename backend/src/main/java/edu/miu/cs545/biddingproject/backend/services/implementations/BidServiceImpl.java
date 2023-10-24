@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.services.implementations;
 
 import edu.miu.cs545.biddingproject.backend.domains.Bid;
+import edu.miu.cs545.biddingproject.backend.domains.Customer;
 import edu.miu.cs545.biddingproject.backend.domains.Product;
 import edu.miu.cs545.biddingproject.backend.repositories.BidRepository;
 import edu.miu.cs545.biddingproject.backend.services.BidService;
@@ -21,6 +22,11 @@ public class BidServiceImpl implements BidService {
     @Override
     public List<Bid> getAllBidsByProduct(Product p) {
         return repository.findAllByProductId(p.getId());
+    }
+
+    @Override
+    public List<Bid> getAllBidsByCustomer(Customer c) {
+        return repository.findAllByCustomerId(c.getId());
     }
 
     @Override

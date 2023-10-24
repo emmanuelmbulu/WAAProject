@@ -3,6 +3,7 @@ package edu.miu.cs545.biddingproject.backend.controllers;
 import edu.miu.cs545.biddingproject.backend.domains.Customer;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewCustomer;
+import edu.miu.cs545.biddingproject.backend.services.BidService;
 import edu.miu.cs545.biddingproject.backend.services.CustomerService;
 import edu.miu.cs545.biddingproject.backend.values.Name;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,9 +14,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("customers")
 public class CustomerController {
     final private CustomerService service;
+    final private BidService bidService;
 
-    public CustomerController(@Qualifier("customerServiceImpl") CustomerService service) {
+    public CustomerController(@Qualifier("customerServiceImpl") CustomerService service,
+                              BidService bidService) {
         this.service = service;
+        this.bidService = bidService;
     }
     @PostMapping("")
     public ResponseEntity<?> createCustomer(@RequestBody DataForNewCustomer data) {
@@ -77,5 +81,13 @@ public class CustomerController {
 
         customer = service.save(customer);
         return ResponseEntity.ok(customer);
+    }
+
+    @GetMapping("{id}/bids")
+    public ResponseEntity<?> getAllBidsMadeByCustomer(@PathVariable Long customerId) {
+        Customer customer = service.getOneById(customerId);
+        if(customer == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(bidService.getAllBidsByCustomer(customer));
     }
 }

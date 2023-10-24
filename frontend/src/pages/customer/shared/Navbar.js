@@ -19,14 +19,10 @@ export default function Navbar () {
                         <li className="nav-item">
                             <Link to={'/winners'} className="nav-link" >Winners</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to={'/bids'} className="nav-link" >Bids</Link>
+                        </li>
                     </ul>
-                    <form className="d-flex">
-                        <button className="btn btn-outline-dark" type="submit">
-                            <i className="bi-cart-fill me-1"></i>
-                            Cart
-                            <span className="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
                     <ul className="d-flex">
                         <li className="nav-item dropdown">
                             <Link to={'#'} className="nav-link dropdown-toggle"
