@@ -16,6 +16,7 @@ import BiddingPage from "./pages/customer/BiddingPage";
 import ListProductsPage from "./pages/seller/product/ListProductsPage";
 import BiddingProductPage from "./pages/customer/BiddingProductPage";
 import ProductDetailsPage from "./pages/seller/product/ProductDetailsPage";
+import EditProductPage from "./pages/seller/product/EditProductPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
 
       {path: '/seller/products/add-product', element: <AddProductPage />},
       {path: '/seller/products/:id', element: <ProductDetailsPage />},
+      {path: '/seller/products/:id/edit', element: <EditProductPage />},
       {path: '/seller/products', element: <ListProductsPage />},
       {path: '/seller/sign-up', element: <SellerSignUp /> },
 

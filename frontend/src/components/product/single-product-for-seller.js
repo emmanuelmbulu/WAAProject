@@ -17,9 +17,7 @@ export default function SingleProductForSeller(props) {
             {!product.savedWithRelease && <div className={'card-body'}>
                 <div className={'row ps-2 pe-2'}>
                     <Link to={'/seller/products/' + product.id +'/edit'}
-                          className="btn btn-primary"
-                          data-bs-toggle="modal"
-                          data-bs-target="#staticBackdrop">Edit</Link>
+                          className="btn btn-primary">Edit</Link>
                 </div>
             </div>}
         </div>

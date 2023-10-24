@@ -187,4 +187,96 @@ public class ProductController {
         if(latestBid == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(latestBid);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(
+            @PathVariable Long id,
+            @RequestBody DataForNewProduct data) {
+        Product productToUpdate = service.getOneById(id);
+        if(productToUpdate == null) return ResponseEntity.notFound().build();
+
+        Product product = Product.builder()
+                .biddingPrice(data.getBiddingPrice())
+                .description(data.getDescription())
+                .name(data.getName())
+                .depositAmount(data.getDepositAmount())
+                .savedWithRelease(data.isSavedWithRelease())
+                .build();
+
+        String name = product.getName();
+        if(name == null || name.trim().isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide the product name.")
+                            .build());
+        }
+        product.setName(name.trim());
+
+        String description = product.getDescription();
+        if(description == null || description.trim().isEmpty()) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide the product description.")
+                            .build());
+        }
+        product.setDescription(description.trim());
+
+        BiddingPrice biddingPrice = product.getBiddingPrice();
+        if(biddingPrice == null) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide bidding information")
+                            .build());
+        }
+
+        if(biddingPrice.getPrice() == 0) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide a valid product starting price")
+                            .build());
+        }
+
+        LocalDateTime endingTime = biddingPrice.getEndingTime();
+        if(endingTime == null || endingTime.isEqual(LocalDateTime.MIN)) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide the bidding ending time.")
+                            .build());
+        }
+        if(endingTime.isBefore(LocalDateTime.now())) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("The bidding ending time can not be in the past.")
+                            .build());
+        }
+
+        LocalDateTime paymentDueDate = biddingPrice.getPaymentDueDate();
+        if(paymentDueDate == null || paymentDueDate.isEqual(LocalDateTime.MIN)) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("Please provide a valid payment due date.")
+                            .build());
+        }
+        if(paymentDueDate.isBefore(LocalDateTime.now())) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("The payment due date can not be in the past.")
+                            .build());
+        }
+        if(paymentDueDate.isBefore(endingTime) || paymentDueDate.isEqual(endingTime)) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1)
+                            .message("The payment due date can not be before the bidding ending time.")
+                            .build());
+        }
+
+        if(product.getDepositAmount() == 0) {
+            product.setDepositAmount(product.getBiddingPrice().getPrice() / 10);
+        }
+
+        product = service.update(id, product);
+        return ResponseEntity.ok(product);
+    }
+
 }

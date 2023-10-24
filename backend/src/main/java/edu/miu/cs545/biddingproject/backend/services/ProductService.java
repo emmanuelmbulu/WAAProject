@@ -13,4 +13,5 @@ public interface ProductService {
     List<Product> getAllProducts();
     List<Product> getAllProductsAvailableForBidding();
     List<Product> getAllProductsBySeller(Seller s);
+    Product update(Long id, Product p);
 }
