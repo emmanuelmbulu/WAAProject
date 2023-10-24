@@ -20,4 +20,7 @@ public class Seller {
     @Embedded
     private Address address;
     private String emailAddress;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

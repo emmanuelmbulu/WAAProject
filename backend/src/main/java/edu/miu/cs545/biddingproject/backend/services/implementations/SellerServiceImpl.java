@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.services.implementations;
 
 import edu.miu.cs545.biddingproject.backend.domains.Seller;
+import edu.miu.cs545.biddingproject.backend.domains.User;
 import edu.miu.cs545.biddingproject.backend.repositories.SellerRepository;
 import edu.miu.cs545.biddingproject.backend.services.SellerService;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public Seller getOneByEmailAddress(String email) {
         return repository.findByEmailAddressIgnoreCase(email).orElse(null);
+    }
+
+    @Override
+    public Seller getSellerRelatedToUser(User user) {
+        return repository.findByUserId(user.getId()).orElse(null);
     }
 }

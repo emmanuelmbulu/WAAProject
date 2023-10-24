@@ -17,4 +17,7 @@ public class Customer {
     private String licenseNumber;
     @Embedded
     private Name name;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
