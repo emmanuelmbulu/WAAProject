@@ -36,6 +36,7 @@ const router = createBrowserRouter([
       {path: '/seller/products/:id/edit', element: <EditProductPage />},
       {path: '/seller/products', element: <ListProductsPage />},
       {path: '/seller/sign-up', element: <SellerSignUp /> },
+      {path: '/seller/sign-in', element: <SellerSignUp /> },
 
       {path: '/sign-up', element: <CustomerSignUp />},
       {path: '/sign-in'},

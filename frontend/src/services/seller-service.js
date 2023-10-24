@@ -7,5 +7,12 @@ export const SellerService = {
   getAllProductsBySeller: () => {
     const sellerId = 1;
     return axiosInstance.get(`/sellers/${sellerId}/products`);
+  },
+  getSeller: (sellerId) => {
+    return axiosInstance.get(`/sellers/${sellerId}`);
+  },
+  getCurrentSeller: () => {
+    const sellerId = 1;
+    return axiosInstance.get(`/sellers/${sellerId}`);
   }
 };

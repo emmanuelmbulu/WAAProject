@@ -19,4 +19,9 @@ public class SellerServiceImpl implements SellerService {
     public Seller getOneById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public Seller getOneByEmailAddress(String email) {
+        return repository.findByEmailAddressIgnoreCase(email).orElse(null);
+    }
 }

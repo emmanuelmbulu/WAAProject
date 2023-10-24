@@ -8,9 +8,6 @@ export default function SideBar() {
             </div>
             <ul className="nav flex-column list-group list-group-flush">
                 <li className="nav-item list-group-item">
-                    <Link className="nav-link" aria-current="page" to={"#"}>Active</Link>
-                </li>
-                <li className="nav-item list-group-item">
                     <Link className="nav-link" aria-current="page" to={"/seller/products"}>My products</Link>
                 </li>
                 <li className="nav-item list-group-item">

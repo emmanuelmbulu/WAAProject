@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface CustomerService {
     Customer save(Customer c);
     Customer getOneById(Long id);
+    Customer getOneByEmailAddress(String email);
 }

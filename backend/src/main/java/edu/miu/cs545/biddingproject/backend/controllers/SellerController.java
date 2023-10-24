@@ -131,4 +131,12 @@ public class SellerController {
 
         return ResponseEntity.ok(productService.getAllProductsBySeller(seller));
     }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getOneSeller(@PathVariable Long id) {
+        Seller seller = service.getOneById(id);
+        if(seller == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(seller);
+    }
 }

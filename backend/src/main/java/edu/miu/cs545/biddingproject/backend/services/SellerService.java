@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 public interface SellerService {
     Seller save(Seller s);
     Seller getOneById(Long id);
+    Seller getOneByEmailAddress(String email);
 }

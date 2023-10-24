@@ -41,7 +41,7 @@ export default function ListProductsPage() {
                             <hr />
                             <div className={'row mt-5'}>
                                 {products.map((p) => (
-                                    <div className={'col-md-3 col-sm-4 pb-3'}><SingleProductForSeller key={p.id} item={p} /></div>
+                                    <div key={p.id} className={'col-md-3 col-sm-4 pb-3'}><SingleProductForSeller item={p} /></div>
                                 ))}
                             </div>
                         </div>

@@ -5,7 +5,12 @@ export const CustomerService = {
         return axiosInstance.post("/customers", customer);
     },
     getAllBidsMade: () => {
-        const custmerId = 1;
-        return axiosInstance.get(`/customers/${custmerId}/bids`);
+        const customerId = 1;
+        return axiosInstance.get(`/customers/${customerId}/bids`);
+    },
+    getCustomer: (customerId) => axiosInstance.get(`/customers/${customerId}`),
+    getCurrentCustomer: () => {
+        const customerId = 1;
+        return axiosInstance.get(`/customers/${customerId}`);
     }
 }

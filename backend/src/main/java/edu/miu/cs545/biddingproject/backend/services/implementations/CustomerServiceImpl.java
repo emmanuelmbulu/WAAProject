@@ -21,4 +21,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getOneById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    @Override
+    public Customer getOneByEmailAddress(String email) {
+        return repository.findByEmailAddressIgnoreCase(email).orElse(null);
+    }
 }

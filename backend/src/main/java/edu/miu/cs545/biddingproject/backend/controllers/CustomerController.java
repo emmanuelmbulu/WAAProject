@@ -1,6 +1,7 @@
 package edu.miu.cs545.biddingproject.backend.controllers;
 
 import edu.miu.cs545.biddingproject.backend.domains.Customer;
+import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewCustomer;
 import edu.miu.cs545.biddingproject.backend.services.BidService;
@@ -89,5 +90,13 @@ public class CustomerController {
         if(customer == null) return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(bidService.getAllBidsByCustomer(customer));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> getOneCustomer(@PathVariable Long id) {
+        Customer customer = service.getOneById(id);
+        if(customer == null) return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(customer);
     }
 }

@@ -1,6 +1,23 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {CustomerService} from "../../../services/customer-service";
 
 export default function Navbar () {
+    const [user, setUser] = useState(null);
+    const [customer, setCustomer] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const response = CustomerService.getCurrentCustomer();
+                setCustomer(response.data);
+            } catch (exception) {
+                navigate('/sign-in');
+            }
+        })();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container px-4 px-lg-5">
@@ -27,7 +44,8 @@ export default function Navbar () {
                         <li className="nav-item dropdown">
                             <Link to={'#'} className="nav-link dropdown-toggle"
                                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Emmanuel Mbulu
+                                {!customer && "Emmanuel Mbulu"}
+                                {customer && `${customer.name.firstName} ${customer.name.lastName}`}
                             </Link>
                             <ul className="dropdown-menu">
                                 <li><Link to={'#'} className="dropdown-item" >Log out</Link></li>
