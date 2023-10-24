@@ -1,7 +1,14 @@
 import { axiosInstance } from "../config/axios-config";
+import Cookies from "js-cookie";
 
 export const BidService = {
   putBid: (bidData) => {
-    return axiosInstance.post("/bids", bidData);
+    const token = Cookies.get("token");
+
+    return axiosInstance.post("/bids", bidData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
 };

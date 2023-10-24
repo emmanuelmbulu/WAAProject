@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import login from "../network";
 import { authenticationService } from "../services/authentication-service";
-
+import Cookies from "js-cookie";
 export default function CustomerLogin() {
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    authenticationService.login(user);
-    // if (res && res.data) {
-    navigate("/home");
-    // }
+    const responce = authenticationService.login(user);
+
+    if (responce && responce.data) {
+      Cookies.set("token", responce.data, { expires: 7 });
+      navigate("/home");
+    }
   };
 
   return (

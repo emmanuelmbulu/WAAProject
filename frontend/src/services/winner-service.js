@@ -1,10 +1,23 @@
 import { axiosInstance } from "../config/axios-config";
+import Cookies from "js-cookie";
 
 export const WinnerService = {
   addWinner: (winner) => {
-    return axiosInstance.post("/winners", winner);
+    const token = Cookies.get("token");
+
+    return axiosInstance.post("/winners", winner, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
   getAllWinners: () => {
-    return axiosInstance.get("/winners");
+    const token = Cookies.get("token");
+
+    return axiosInstance.get("/winners", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
 };

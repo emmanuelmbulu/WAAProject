@@ -17,6 +17,7 @@ import ListProductsPage from "./pages/seller/product/ListProductsPage";
 import BiddingProductPage from "./pages/customer/BiddingProductPage";
 import ProductDetailsPage from "./pages/seller/product/ProductDetailsPage";
 import EditProductPage from "./pages/seller/product/EditProductPage";
+
 const router = createBrowserRouter([
   {
     path: "/",
