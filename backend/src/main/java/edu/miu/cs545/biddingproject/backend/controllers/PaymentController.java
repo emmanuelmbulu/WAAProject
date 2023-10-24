@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -79,7 +80,7 @@ public class PaymentController {
                 .paymentType(PaymentType.DEPOSIT)
                 .amount(product.getDepositAmount())
                 .customer(customer)
-                .payedAt(LocalDate.now())
+                .payedAt(LocalDateTime.now())
                 .product(product)
                 .build();
         payment = service.save(payment);

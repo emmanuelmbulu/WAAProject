@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor
@@ -15,7 +15,7 @@ public class Payment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double amount;
-    private LocalDate payedAt;
+    private LocalDateTime payedAt;
     @Enumerated(value = EnumType.STRING)
     private PaymentType paymentType;
     @ManyToOne

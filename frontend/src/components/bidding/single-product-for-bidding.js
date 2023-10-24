@@ -3,6 +3,7 @@ import {ProductService} from "../../services/product-service";
 import BidData from "../../data/bidData";
 import {BidService} from "../../services/bid-service";
 import {PaymentService} from "../../services/payment-service";
+import JavaDatetimeToDate from "../../utils/java-datetime-to-date";
 
 function timeToString(time) {
     function formatTime(t) {
@@ -29,7 +30,7 @@ function timeToString(time) {
 export default function SingleProductForBidding(props) {
     const product = props.item;
     const customerId = props.customer;
-    const dueDate = new Date(product.biddingPrice.endingTime);
+    const dueDate = JavaDatetimeToDate(product.biddingPrice.endingTime);
     const timeDifference = dueDate - new Date();
 
     const [canBid, setCanBid] = useState(false);
@@ -122,8 +123,8 @@ export default function SingleProductForBidding(props) {
                             {!hasBid && <p className={'card-text'}>Actual price: <mark>${product.biddingPrice.price}</mark></p>}
                         </li>
                         <li className="list-group-item">
-                            {(timeLeft <= (48 * 60 * 60000)) && <strong className="text-danger">{timeToString(timeLeft)}</strong>}
-                            {(timeLeft > (48 * 60 * 60000)) && <strong className="text-success">{timeToString(timeLeft)}</strong>}
+                            {(timeLeft <= (48 * 60 * 60000)) && <small><strong className="text-danger">{timeToString(timeLeft)}</strong></small>}
+                            {(timeLeft > (48 * 60 * 60000)) && <small><strong className="text-success">{timeToString(timeLeft)}</strong></small>}
                         </li>
                     </ul>
                     <div className={'card-body'}>

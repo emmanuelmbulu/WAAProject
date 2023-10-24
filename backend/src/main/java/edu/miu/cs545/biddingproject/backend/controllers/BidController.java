@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("bids")
@@ -34,10 +35,13 @@ public class BidController {
     @PostMapping("")
     public ResponseEntity<?> createBid(@RequestBody DataForNewBid data) {
         Customer customer = customerService.getOneById(data.getCustomerId());
+        if(customer == null) return ResponseEntity.notFound().build();
+
         Product product = productService.getOneById(data.getProductId());
+        if(product == null) return ResponseEntity.notFound().build();
 
         Bid bid = Bid.builder()
-                .createdAt(LocalDate.now())
+                .createdAt(LocalDateTime.now())
                 .customer(customer)
                 .price(data.getPrice())
                 .product(product)

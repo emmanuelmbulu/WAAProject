@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor @AllArgsConstructor
@@ -15,7 +15,7 @@ public class Bid {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private double price;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")

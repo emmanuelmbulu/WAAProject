@@ -21,12 +21,12 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public List<Bid> getAllBidsByProduct(Product p) {
-        return repository.findAllByProductId(p.getId());
+        return repository.findAllByProductIdOrderByIdDesc(p.getId());
     }
 
     @Override
     public List<Bid> getAllBidsByCustomer(Customer c) {
-        return repository.findAllByCustomerId(c.getId());
+        return repository.findAllByCustomerIdOrderByIdDesc(c.getId());
     }
 
     @Override

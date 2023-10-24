@@ -52,8 +52,6 @@ export default function AddProductPage() {
                 )
 
                 const response = await ProductService.addProduct(productData);
-                console.log(response.data);
-                console.log(imageInput.current.files[0]);
 
                 if(imageInput.current.files.length > 0) {
                     saveProductPicture(response.data.id);
@@ -82,7 +80,6 @@ export default function AddProductPage() {
         const input = event.target;
         setProductObject({...productObject, [input.name]: input.value})
     }
-
 
     return (
         <>

@@ -84,7 +84,7 @@ public class CustomerController {
     }
 
     @GetMapping("{id}/bids")
-    public ResponseEntity<?> getAllBidsMadeByCustomer(@PathVariable Long customerId) {
+    public ResponseEntity<?> getAllBidsMadeByCustomer(@PathVariable(name = "id") Long customerId) {
         Customer customer = service.getOneById(customerId);
         if(customer == null) return ResponseEntity.notFound().build();
 

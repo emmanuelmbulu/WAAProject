@@ -6,13 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Embeddable
 @AllArgsConstructor @NoArgsConstructor
 @Data @Builder
 public class BiddingPrice {
     private double price;
-    private LocalDate endingTime;
-    private LocalDate paymentDueDate;
+    private LocalDateTime endingTime;
+    private LocalDateTime paymentDueDate;
 }

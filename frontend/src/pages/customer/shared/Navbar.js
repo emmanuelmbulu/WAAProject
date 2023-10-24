@@ -4,7 +4,7 @@ export default function Navbar () {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container px-4 px-lg-5">
-                <Link to={'/'} className={'navbar-brand'}>Bidding!</Link>
+                <Link to={'/bidding'} className={'navbar-brand'}>Bidding!</Link>
                 <button className="navbar-toggler" type="button"
                         data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -14,13 +14,13 @@ export default function Navbar () {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li className="nav-item">
-                            <Link to={'/'} className="nav-link active" aria-current="page">Home</Link>
+                            <Link to={'/bidding'} className="nav-link active" aria-current="page">Home</Link>
                         </li>
                         <li className="nav-item">
                             <Link to={'/winners'} className="nav-link" >Winners</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to={'/bids'} className="nav-link" >Bids</Link>
+                            <Link to={'/bids-history'} className="nav-link" >Bids</Link>
                         </li>
                     </ul>
                     <ul className="d-flex">

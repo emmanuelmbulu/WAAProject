@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -98,28 +99,28 @@ public class ProductController {
                             .build());
         }
 
-        LocalDate endingTime = biddingPrice.getEndingTime();
-        if(endingTime == null || endingTime.isEqual(LocalDate.MIN)) {
+        LocalDateTime endingTime = biddingPrice.getEndingTime();
+        if(endingTime == null || endingTime.isEqual(LocalDateTime.MIN)) {
             return ResponseEntity.badRequest()
                     .body(ApiBodyForError.builder()
                             .code(1).message("Please provide the bidding ending time.")
                             .build());
         }
-        if(endingTime.isBefore(LocalDate.now())) {
+        if(endingTime.isBefore(LocalDateTime.now())) {
             return ResponseEntity.badRequest()
                     .body(ApiBodyForError.builder()
                             .code(1).message("The bidding ending time can not be in the past.")
                             .build());
         }
 
-        LocalDate paymentDueDate = biddingPrice.getPaymentDueDate();
-        if(paymentDueDate == null || paymentDueDate.isEqual(LocalDate.MIN)) {
+        LocalDateTime paymentDueDate = biddingPrice.getPaymentDueDate();
+        if(paymentDueDate == null || paymentDueDate.isEqual(LocalDateTime.MIN)) {
             return ResponseEntity.badRequest()
                     .body(ApiBodyForError.builder()
                             .code(1).message("Please provide a valid payment due date.")
                             .build());
         }
-        if(paymentDueDate.isBefore(LocalDate.now())) {
+        if(paymentDueDate.isBefore(LocalDateTime.now())) {
             return ResponseEntity.badRequest()
                     .body(ApiBodyForError.builder()
                             .code(1).message("The payment due date can not be in the past.")
