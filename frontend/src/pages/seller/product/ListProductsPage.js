@@ -1,11 +1,8 @@
 import Navbar from "../shared/Navbar";
 import SideBar from "../shared/SideBar";
-import ErrorNotification from "../../../components/shared/error-notification/ErrorNotification";
 import Footer from "../../../components/shared/Footer";
 import React, {useEffect, useState} from "react";
-import {ProductService} from "../../../services/product-service";
 import {SellerService} from "../../../services/seller-service";
-import SingleProductForBidding from "../../../components/bidding/single-product-for-bidding";
 import SingleProductForSeller from "../../../components/product/single-product-for-seller";
 
 export default function ListProductsPage() {
@@ -43,6 +40,10 @@ export default function ListProductsPage() {
                                 {products.map((p) => (
                                     <div key={p.id} className={'col-md-3 col-sm-4 pb-3'}><SingleProductForSeller item={p} /></div>
                                 ))}
+
+                                {!productsLength && <div className="alert alert-info" role="alert">
+                                    Sorry, we did not find any products added by you!
+                                </div>}
                             </div>
                         </div>
                     </div>

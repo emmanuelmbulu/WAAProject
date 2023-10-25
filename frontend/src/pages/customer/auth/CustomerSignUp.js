@@ -27,7 +27,7 @@ export default function CustomerSignUp() {
                 const customer = new CustomerData(
                     customerObject.firstName,
                     customerObject.lastName,
-                    customerObject.passWord,
+                    customerObject.password,
                     customerObject.email,
                     customerObject.licenseNumber
                 );

@@ -1,11 +1,13 @@
 package edu.miu.cs545.biddingproject.backend.controllers;
 
 import edu.miu.cs545.biddingproject.backend.domains.Customer;
-import edu.miu.cs545.biddingproject.backend.domains.Seller;
+import edu.miu.cs545.biddingproject.backend.domains.User;
+import edu.miu.cs545.biddingproject.backend.domains.UserRole;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewCustomer;
 import edu.miu.cs545.biddingproject.backend.services.BidService;
 import edu.miu.cs545.biddingproject.backend.services.CustomerService;
+import edu.miu.cs545.biddingproject.backend.services.UserService;
 import edu.miu.cs545.biddingproject.backend.values.Name;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -13,14 +15,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("customers")
+@CrossOrigin
 public class CustomerController {
     final private CustomerService service;
     final private BidService bidService;
+    final private UserService userService;
 
     public CustomerController(@Qualifier("customerServiceImpl") CustomerService service,
-                              BidService bidService) {
+                              BidService bidService, UserService userService) {
         this.service = service;
         this.bidService = bidService;
+        this.userService = userService;
     }
     @PostMapping("")
     public ResponseEntity<?> createCustomer(@RequestBody DataForNewCustomer data) {
@@ -80,6 +85,24 @@ public class CustomerController {
         }
         customer.setEmailAddress(email.trim().toLowerCase());
 
+        if(service.getOneByEmailAddress(customer.getEmailAddress()) != null
+            || userService.getUserByEmailAddress(customer.getEmailAddress()) != null) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("This email address is already used.")
+                            .build());
+        }
+
+        User user = User.builder()
+                .username(customer.getEmailAddress())
+                .enabled(true).accountNonExpired(true)
+                .credentialsNonExpired(true).accountNonLocked(true)
+                .role(UserRole.CUSTOMER).password(
+                        userService.getPasswordEncoder()
+                                .encode(data.getPassword())
+                ).build();
+
+        customer.setUser(user);
         customer = service.save(customer);
         return ResponseEntity.ok(customer);
     }

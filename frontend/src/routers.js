@@ -17,6 +17,10 @@ import ListProductsPage from "./pages/seller/product/ListProductsPage";
 import BiddingProductPage from "./pages/customer/BiddingProductPage";
 import ProductDetailsPage from "./pages/seller/product/ProductDetailsPage";
 import EditProductPage from "./pages/seller/product/EditProductPage";
+import NotFound from "./pages/customer/404";
+import NotFoundForSeller from "./pages/seller/404";
+import SellerSignIn from "./pages/seller/auth/SellerSignIn";
+import CustomerSignIn from "./pages/customer/auth/CustomerSignIn";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +41,15 @@ const router = createBrowserRouter([
       {path: '/seller/products/:id/edit', element: <EditProductPage />},
       {path: '/seller/products', element: <ListProductsPage />},
       {path: '/seller/sign-up', element: <SellerSignUp /> },
-      {path: '/seller/sign-in', element: <SellerSignUp /> },
+      {path: '/seller/sign-in', element: <SellerSignIn /> },
+      {path: '/seller/*', element: <NotFoundForSeller /> },
 
       {path: '/sign-up', element: <CustomerSignUp />},
-      {path: '/sign-in'},
+      {path: '/sign-in', element: <CustomerSignIn />},
       {path: '/bidding', element:<BiddingPage />},
       {path: '/bidding/:id', element:<BiddingProductPage />},
-      {path: '/bids-history', element: <BidsHistory />}
+      {path: '/bids-history', element: <BidsHistory />},
+      {path: '*', element: <NotFound />},
     ],
   },
 ]);

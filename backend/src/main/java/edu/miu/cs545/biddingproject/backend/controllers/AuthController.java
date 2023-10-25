@@ -5,6 +5,7 @@ import edu.miu.cs545.biddingproject.backend.domains.Seller;
 import edu.miu.cs545.biddingproject.backend.domains.User;
 import edu.miu.cs545.biddingproject.backend.domains.UserRole;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForAuthentication;
+import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.services.CustomerService;
 import edu.miu.cs545.biddingproject.backend.services.SellerService;
 import edu.miu.cs545.biddingproject.backend.services.UserService;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 
 @RestController
+@CrossOrigin
 public class AuthController {
     private final AuthenticationManager authenticationManager;
     final private JwtUtil jwtUtil;
@@ -41,11 +44,13 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> getLogin(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
         try {
+            System.out.println("USER ");
+            System.out.println(user);
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            user.getEmail(), user.getPassword()
+                            user.getUsername(), user.getPassword()
                     )
             );
             user = (User) authentication.getPrincipal();
@@ -70,10 +75,27 @@ public class AuthController {
             return ResponseEntity.ok(
                     ApiBodyForAuthentication.builder()
                             .token(token).userId(userId)
-                            .tokenExpirationDate(expirationDate).build()
+                            .tokenExpirationDate(expirationDate)
+                            .build()
             );
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@RequestBody ApiBodyForAuthentication data) {
+        if(data == null) return ResponseEntity.badRequest().body(
+                ApiBodyForError.builder()
+                        .code(1).message("No data found for logging out.")
+                        .build()
+        );
+
+        String token = data.getToken();
+        jwtUtil.invalidateToken(token);
+        return ResponseEntity.ok(ApiBodyForError.builder()
+                .code(0).message("Logout successfully!")
+                .build());
+    }
+
 }

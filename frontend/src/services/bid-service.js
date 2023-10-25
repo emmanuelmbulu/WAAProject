@@ -7,8 +7,8 @@ export const BidService = {
 
     return axiosInstance.post("/bids", bidData, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   },
 };

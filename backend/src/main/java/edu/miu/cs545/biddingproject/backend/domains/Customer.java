@@ -17,7 +17,7 @@ public class Customer {
     private String licenseNumber;
     @Embedded
     private Name name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
 }

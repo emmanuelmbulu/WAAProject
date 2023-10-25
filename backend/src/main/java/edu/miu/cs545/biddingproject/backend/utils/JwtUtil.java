@@ -9,17 +9,25 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
-import java.util.Date;
+import java.util.*;
 import java.util.function.Function;
 
 @Component
 public class JwtUtil {
+    final static private String AUTH_HEADER = "Authorization";
+    final static private String TOKEN_PREFIX = "Bearer";
 
     @Value("${app.config.jwt.expiration}")
     private Long EXPIRATION;
 
     @Value("${app.config.jwt.secret}")
     private String SECRET;
+
+    final private Set<String> tokensBlackList;
+
+    public JwtUtil() {
+        this.tokensBlackList = new HashSet<>();
+    }
 
     public String generateAccessToken(User user) {
         return Jwts.builder()
@@ -46,8 +54,14 @@ public class JwtUtil {
     }
 
     public boolean isTokenValid(String token, User user) {
+        if(tokensBlackList.contains(token)) return false;
+
         final String userName = extractUserName(token);
         return (userName.equals(user.getUsername())) && !isTokenExpired(token);
+    }
+
+    public void invalidateToken(String token) {
+        tokensBlackList.add(token);
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
@@ -60,7 +74,8 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
+        return Jwts.parserBuilder().setSigningKey(getSigningKey())
+                .build().parseClaimsJws(token)
                 .getBody();
     }
 }

@@ -11,8 +11,8 @@ export const SellerService = {
 
     return axiosInstance.get(`/sellers/${userId}/products`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   },
   getSeller: (sellerId) => {
@@ -20,8 +20,8 @@ export const SellerService = {
 
     return axiosInstance.get(`/sellers/${sellerId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   },
   getCurrentSeller: () => {
@@ -30,8 +30,8 @@ export const SellerService = {
 
     return axiosInstance.get(`/sellers/${userId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   }
 };

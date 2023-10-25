@@ -1,10 +1,9 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {SellerService} from "../../../services/seller-service";
+import {AuthenticationService} from "../../../services/authentication-service";
 
 export default function Navbar () {
-
-    const [user, setUser] = useState(null);
     const [seller, setSeller] = useState(null);
     const navigate = useNavigate();
 
@@ -15,10 +14,21 @@ export default function Navbar () {
                 setSeller(response.data);
             } catch (exception) {
                 console.log(exception);
-                //navigate('/seller/sign-in');
+                navigate('/seller/sign-in');
             }
         })();
     }, []);
+
+    const handleLogout = () => {
+        (async () => {
+            try {
+                const response = await AuthenticationService.logout();
+            } catch (exception) {
+                console.log(exception);
+            }
+            navigate('/seller/sign-in');
+        })();
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom border-body">
@@ -48,7 +58,7 @@ export default function Navbar () {
                             </Link>
                             <ul className="dropdown-menu">
                                 <li key={1}><Link to={'#'} className="dropdown-item" >Profile</Link></li>
-                                <li key={2}><Link to={'#'} className="dropdown-item" >Log out</Link></li>
+                                <li key={2}><Link onClick={handleLogout} to={'#'} className="dropdown-item" >Log out</Link></li>
                             </ul>
                         </li>
                     </ul>

@@ -25,6 +25,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products")
+@CrossOrigin
 public class ProductController {
 
     final private ProductService service;

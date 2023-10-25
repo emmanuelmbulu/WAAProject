@@ -1,10 +1,13 @@
 package edu.miu.cs545.biddingproject.backend.controllers;
 
 import edu.miu.cs545.biddingproject.backend.domains.Seller;
+import edu.miu.cs545.biddingproject.backend.domains.User;
+import edu.miu.cs545.biddingproject.backend.domains.UserRole;
 import edu.miu.cs545.biddingproject.backend.queries.ApiBodyForError;
 import edu.miu.cs545.biddingproject.backend.queries.DataForNewSeller;
 import edu.miu.cs545.biddingproject.backend.services.ProductService;
 import edu.miu.cs545.biddingproject.backend.services.SellerService;
+import edu.miu.cs545.biddingproject.backend.services.UserService;
 import edu.miu.cs545.biddingproject.backend.values.Address;
 import edu.miu.cs545.biddingproject.backend.values.Name;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,14 +16,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("sellers")
+@CrossOrigin
 public class SellerController {
     final private SellerService service;
     final private ProductService productService;
+    final private UserService userService;
 
     public SellerController(@Qualifier("sellerServiceImpl") SellerService service,
-                            ProductService productService) {
+                            ProductService productService, UserService userService) {
         this.service = service;
         this.productService = productService;
+        this.userService = userService;
     }
 
     @PostMapping("")
@@ -117,9 +123,24 @@ public class SellerController {
         }
         seller.setEmailAddress(email.trim().toLowerCase());
 
-        /***
-         * TODO: ADD USER CREATION
-         */
+        if(service.getOneByEmailAddress(seller.getEmailAddress()) != null
+                || userService.getUserByEmailAddress(seller.getEmailAddress()) != null) {
+            return ResponseEntity.badRequest()
+                    .body(ApiBodyForError.builder()
+                            .code(1).message("This email address is already used.")
+                            .build());
+        }
+
+        User user = User.builder()
+                .username(seller.getEmailAddress())
+                .enabled(true).accountNonExpired(true)
+                .credentialsNonExpired(true).accountNonLocked(true)
+                .role(UserRole.SELLER).password(
+                        userService.getPasswordEncoder()
+                                .encode(data.getPassword())
+                ).build();
+
+        seller.setUser(user);
         seller = service.save(seller);
         return ResponseEntity.ok(seller);
     }

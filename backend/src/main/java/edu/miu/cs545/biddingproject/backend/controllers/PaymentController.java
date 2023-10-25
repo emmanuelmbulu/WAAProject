@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("payments")
+@CrossOrigin
 public class PaymentController {
     final private PaymentService service;
     final private CustomerService customerService;

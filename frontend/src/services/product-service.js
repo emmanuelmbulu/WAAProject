@@ -7,7 +7,7 @@ export const ProductService = {
 
     return axiosInstance.post("/products", product, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
   },
@@ -16,7 +16,7 @@ export const ProductService = {
 
     return axiosInstance.get("/products", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
   },
@@ -25,7 +25,7 @@ export const ProductService = {
 
     return axiosInstance.get(`/products/${productId}/bids/latest`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
   },
@@ -35,7 +35,7 @@ export const ProductService = {
     return axiosInstance.post(`products/${productId}`, image, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${token}`,
+        "Authorization": `Bearer ${token}`,
       },
     });
   },
@@ -44,8 +44,8 @@ export const ProductService = {
 
     return axiosInstance.get(`products/${productId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   },
   updateProduct: (productId, product) => {
@@ -53,8 +53,8 @@ export const ProductService = {
 
     return axiosInstance.put(`/products/${productId}`, product, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
+        "Authorization": `Bearer ${token}`,
+      }
     });
   },
 };

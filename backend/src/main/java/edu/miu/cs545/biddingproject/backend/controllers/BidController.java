@@ -9,16 +9,14 @@ import edu.miu.cs545.biddingproject.backend.services.CustomerService;
 import edu.miu.cs545.biddingproject.backend.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("bids")
+@CrossOrigin
 public class BidController {
     final private BidService service;
     final private ProductService productService;

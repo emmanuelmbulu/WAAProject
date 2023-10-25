@@ -1,6 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {CustomerService} from "../../../services/customer-service";
+import {AuthenticationService} from "../../../services/authentication-service";
 
 export default function Navbar () {
     const [user, setUser] = useState(null);
@@ -17,6 +18,17 @@ export default function Navbar () {
             }
         })();
     }, []);
+
+    const handleLogout = () => {
+        (async () => {
+            try {
+                const response = await AuthenticationService.logout();
+            } catch (exception) {
+                console.log(exception);
+            }
+            navigate('/sign-in');
+        })();
+    };
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,7 +60,7 @@ export default function Navbar () {
                                 {customer && `${customer.name.firstName} ${customer.name.lastName}`}
                             </Link>
                             <ul className="dropdown-menu">
-                                <li><Link to={'#'} className="dropdown-item" >Log out</Link></li>
+                                <li><Link onClick={handleLogout} to={'#'} className="dropdown-item" >Log out</Link></li>
                             </ul>
                         </li>
                     </ul>

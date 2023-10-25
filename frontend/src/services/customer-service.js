@@ -12,8 +12,8 @@ export const CustomerService = {
 
         return axiosInstance.get(`/customers/${userId}/bids`, {
             headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                "Authorization": `Bearer ${token}`,
+            }
         });
     },
     getCustomer: (customerId) => {
@@ -21,8 +21,8 @@ export const CustomerService = {
 
         return axiosInstance.get(`/customers/${customerId}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                "Authorization": `Bearer ${token}`,
+            }
         });
     },
     getCurrentCustomer: () => {
@@ -31,8 +31,8 @@ export const CustomerService = {
 
         return axiosInstance.get(`/customers/${userId}`, {
             headers: {
-                Authorization: `Bearer ${token}`,
-            },
+                "Authorization": `Bearer ${token}`,
+            }
         });
     }
 }

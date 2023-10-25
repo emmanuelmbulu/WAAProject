@@ -1,10 +1,16 @@
 import { axiosInstance } from "../config/axios-config";
 import Cookies from "js-cookie";
 
-const token = Cookies.get("token");
 
-export const authenticationService = {
+export const AuthenticationService = {
   login: (user) => {
-    axiosInstance.post("/login", user);
+    return axiosInstance.post("/login", user);
   },
+  logout: () => {
+    const token = Cookies.get("token");
+    const user = {token};
+    Cookies.remove('token');
+    Cookies.remove('user');
+    return axiosInstance.post('/logout', user);
+  }
 };

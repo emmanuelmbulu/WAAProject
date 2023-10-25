@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authenticationService } from "../services/authentication-service";
+import {AuthenticationService} from "../services/authentication-service";
 import Cookies from "js-cookie";
 
 export default function SellerLogin() {
@@ -8,7 +8,7 @@ export default function SellerLogin() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    const responce = authenticationService.login(user);
+    const responce = AuthenticationService.login(user);
 
     if (responce && responce.data) {
       Cookies.set("token", responce.data, { expires: 7 });

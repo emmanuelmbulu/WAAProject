@@ -45,13 +45,14 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User getUserByEmailAddress(String emailAddress) {
-        return _repository.findByEmailIgnoreCase(emailAddress).orElse(null);
+        return _repository.findByUsernameIgnoreCase(emailAddress).orElse(null);
     }
 
     @Override
     public User save(User user) {
         String password = user.getPassword();
         user.setPassword(_passwordEncoder.encode(password));
+        System.out.println("Password is : " + password);
         return _repository.save(user);
     }
 
@@ -62,7 +63,7 @@ public class UserServiceImplementation implements UserService {
         User userToUpdate = this.getUserById(id);
         if(userToUpdate == null) return null;
 
-        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setUsername(user.getUsername());
 
         String password = user.getPassword();
         if(password != null && !password.isEmpty()) {

@@ -7,9 +7,9 @@ export const PaymentService = {
 
       return axiosInstance.get(
       `/payments/deposits?prod=${productId}&&cust=${customerId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+              headers: {
+                  "Authorization": `Bearer ${token}`,
+              }
         }
     );
   },
@@ -17,9 +17,9 @@ export const PaymentService = {
       const token = Cookies.get("token");
 
       return axiosInstance.post("/payments/deposits", paymentData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+          headers: {
+              "Authorization": `Bearer ${token}`,
+          }
     });
   },
 };
