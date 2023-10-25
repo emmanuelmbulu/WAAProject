@@ -11,7 +11,7 @@ export default function Navbar () {
     useEffect(() => {
         (async () => {
             try {
-                const response = CustomerService.getCurrentCustomer();
+                const response = await CustomerService.getCurrentCustomer();
                 setCustomer(response.data);
             } catch (exception) {
                 navigate('/sign-in');

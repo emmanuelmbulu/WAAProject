@@ -32,6 +32,10 @@ export default function BiddingPage({children}) {
                             <SingleProductForBidding key={p.id} item={p} customer={1} />
                         ))}
                     </div>
+
+                    {!productsLength && <div className="alert alert-info" role="alert">
+                        Sorry, we did not find any products available for bidding!
+                    </div>}
                 </div>
             </section>
             <Footer/>

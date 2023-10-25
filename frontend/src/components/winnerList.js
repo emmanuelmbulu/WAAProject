@@ -1,6 +1,9 @@
 import Winner from "./winner";
 import { WinnerService } from "../services/winner-service";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Navbar from "../pages/customer/shared/Navbar";
+import SingleProductForBidding from "./bidding/single-product-for-bidding";
+import Footer from "./shared/Footer";
 
 const allWinners = [
   {
@@ -38,7 +41,7 @@ const allWinners = [
     },
   },
   {
-    id: 1,
+    id: 3,
     product: {
       name: "Product 1",
       price: 100,
@@ -55,7 +58,7 @@ const allWinners = [
     },
   },
   {
-    id: 1,
+    id: 4,
     product: {
       name: "Product 1",
       price: 100,
@@ -72,7 +75,7 @@ const allWinners = [
     },
   },
   {
-    id: 1,
+    id: 5,
     product: {
       name: "Product 1",
       price: 100,
@@ -89,7 +92,7 @@ const allWinners = [
     },
   },
   {
-    id: 1,
+    id: 6,
     product: {
       name: "Product 1",
       price: 100,
@@ -109,6 +112,7 @@ const allWinners = [
 
 export default function WinnerList() {
   const [winners, setWinners] = useState(allWinners);
+  const [winnersLength, setWinnersLength] = useState(6);
 
   useEffect(() => {
     (async () => {
@@ -125,12 +129,28 @@ export default function WinnerList() {
   console.log("all is ", allWinners);
 
   return (
-    <div className="row">
-      {winners.map((w) => (
-        <div className="col-md">
-          <Winner key={w.id} winnerData={w} />
-        </div>
-      ))}
-    </div>
+      <>
+        <Navbar />
+        <section className="py-3">
+          <div className="container px-4 px-lg-5 mt-5">
+            <div className={'row mb-4'}>
+              <h1>Latest winners</h1>
+              <hr />
+            </div>
+            <div className={'row'}>
+              {winners.map((w) => (
+                  <div className="col-md-3 pb-4">
+                    <Winner key={w.id} winnerData={w} />
+                  </div>
+              ))}
+            </div>
+
+            {!winnersLength && <div className="alert alert-info" role="alert">
+              Sorry, we did not find any winners so far!
+            </div>}
+          </div>
+        </section>
+        <Footer/>
+      </>
   );
 }
