@@ -25,7 +25,7 @@ import CustomerSignIn from "./pages/customer/auth/CustomerSignIn";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <BiddingPage />,
+    element: <Layout />,
     children: [
       { path: "/customerlogin", element: <CustomerLogin /> },
       { path: "/sellerlogin", element: <SellerLogin /> },
@@ -46,6 +46,7 @@ const router = createBrowserRouter([
 
       {path: '/sign-up', element: <CustomerSignUp />},
       {path: '/sign-in', element: <CustomerSignIn />},
+      {path: '/', element:<BiddingPage />},
       {path: '/bidding', element:<BiddingPage />},
       {path: '/bidding/:id', element:<BiddingProductPage />},
       {path: '/bids-history', element: <BidsHistory />},
