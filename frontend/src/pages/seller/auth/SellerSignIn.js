@@ -78,6 +78,11 @@ export default function SellerSignIn() {
                                 <button className={'btn btn-lg btn-primary'} onClick={handleSignIn}>Sign In</button>
                                 <Link to={'/seller/sign-up'} className={'btn btn-link'}>I am not member</Link>
                             </div>
+                            <div className="row g-2 mt-1">
+                                <p className={'text-center mt-3'}>
+                                    Are you a customer ? <Link to={'/sign-in'} >Sign in as a customer.</Link>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>

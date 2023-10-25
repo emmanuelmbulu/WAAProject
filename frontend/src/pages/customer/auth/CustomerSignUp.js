@@ -123,7 +123,7 @@ export default function CustomerSignUp() {
                         Have an account ? <Link to={'/sign-in'} >Sign in.</Link>
                     </p>
                     <p className={'text-center mt-3'}>
-                        A seller ? <Link to={'/sign-in'} >Go to Bidding! for Seller.</Link>
+                        A seller ? <Link to={'/seller/sign-in'} >Go to Bidding! for Seller.</Link>
                     </p>
                 </article>
             </div>

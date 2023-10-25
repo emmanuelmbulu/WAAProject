@@ -162,6 +162,11 @@ export default function SellerSignUp() {
                                     <button className={'btn btn-lg btn-primary'} onClick={handleSignup}>Sign Up</button>
                                     <Link to={'/seller/sign-in'} className={'btn btn-link'}>I am already a member.</Link>
                                 </div>
+                                <div className="row g-2 mt-1">
+                                    <p className={'text-center mt-3'}>
+                                        Are you a customer ? <Link to={'/sign-in'} >Sign in as a customer.</Link>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
