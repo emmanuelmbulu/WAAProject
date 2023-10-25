@@ -80,6 +80,9 @@ export default function CustomerSignIn() {
                     <p className={'text-center mt-3'}>
                         Don't have an account ? <Link to={'/sign-up'} >Sign up.</Link>
                     </p>
+                    <p className={'text-center mt-3'}>
+                        A seller ? <Link to={'/sign-in'} >Go to Bidding! for Seller.</Link>
+                    </p>
                 </article>
             </div>
         </div>

@@ -25,7 +25,7 @@ import CustomerSignIn from "./pages/customer/auth/CustomerSignIn";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <BiddingPage />,
     children: [
       { path: "/customerlogin", element: <CustomerLogin /> },
       { path: "/sellerlogin", element: <SellerLogin /> },

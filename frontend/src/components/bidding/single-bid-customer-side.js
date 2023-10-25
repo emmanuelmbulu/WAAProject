@@ -42,8 +42,9 @@ export default function SingleBidCustomerSide(props) {
             </div>
             <div className={'row'}>
                 <div className={'col-md-1 col-sm-2'}>
-                    <img style={{width: '120px'}} src={product.pictureUri}
-                         alt={'Picture of ' + product.name} className={'img-thumbnail'} />
+                    {product.pictureUri && <img style={{width: '120px'}} src={product.pictureUri} alt={'Picture of ' + product.name} className={'img-thumbnail'} />}
+                    {!product.pictureUri && <img style={{width: '120px'}} src={'https://dummyimage.com/600x700/dee2e6/6c757d.jpg'} alt={'Picture of ' + product.name} className={'img-thumbnail'} />}
+
                 </div>
                 <div className={'col-md'}>
                     <p className={'align-top'}>

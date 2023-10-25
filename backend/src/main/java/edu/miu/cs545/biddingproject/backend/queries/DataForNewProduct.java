@@ -10,6 +10,6 @@ public class DataForNewProduct {
     private String name;
     private String description;
     private BiddingPrice biddingPrice;
-    private boolean isSavedWithRelease;
+    private boolean savedWithRelease;
     private double depositAmount;
 }

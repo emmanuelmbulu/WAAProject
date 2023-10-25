@@ -6,7 +6,7 @@ export default function(name, description, price, endingTime, paymentDueDate, is
     this.biddingPrice = {
         price, endingTime, paymentDueDate
     };
-    this.isSavedWithRelease = isSavedWithRelease;
+    this.savedWithRelease = isSavedWithRelease;
     this.depositAmount = deposit;
     this.sellerId = sellerId;
 
@@ -18,7 +18,7 @@ export default function(name, description, price, endingTime, paymentDueDate, is
             "endingTime":"${this.biddingPrice.endingTime}",
             "paymentDueDate":"${this.biddingPrice.paymentDueDate}"
             },
-            "isSavedWithRelease":${this.isSavedWithRelease},
+            "savedWithRelease":${this.savedWithRelease},
             "depositAmount":"${this.depositAmount}",
             "sellerId":${this.sellerId} 
             }`;

@@ -95,7 +95,9 @@ export default function SingleProductForBidding(props) {
         <>
             <div className="col-md-3 col-sm-3 pb-3">
                 <div className="card h-100">
-                    <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>
+                    {product.pictureUri && <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>}
+                    {!product.pictureUri && <img src={'https://dummyimage.com/600x700/dee2e6/6c757d.jpg'} className="card-img-top border-bottom" alt={product.name}/>}
+
                     <div className="card-body">
                         <h5 className="card-title"><Link className={'text-decoration-none'} to={'/bidding/' + product.id}>{product.name}</Link></h5>
                     </div>

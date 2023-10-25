@@ -5,7 +5,9 @@ export default function SingleProductForSeller(props) {
 
     return (
         <div className="card">
-            <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>
+            {product.pictureUri && <img src={product.pictureUri} className="card-img-top border-bottom" alt={product.name}/>}
+            {!product.pictureUri && <img src={'https://dummyimage.com/600x700/dee2e6/6c757d.jpg'} className="card-img-top border-bottom" alt={product.name}/>}
+
             <div className="card-body">
                 <h5 className="card-title">
                     <Link to={'/seller/products/' + product.id} className={'text-decoration-none'}>{product.name}</Link>

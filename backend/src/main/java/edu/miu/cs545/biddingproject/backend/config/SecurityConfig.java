@@ -54,7 +54,7 @@ public class SecurityConfig {
                             req/*.requestMatchers("/books").authenticated()
                             .requestMatchers("/books/**").hasAuthority("ROLE_ADMIN")
                             .requestMatchers("/users/**").hasAuthority("ROLE_ADMIN")*/
-                                    .requestMatchers("/login", "/logout", "/sellers", "customers")
+                                    .requestMatchers("/login", "/logout", "/sellers", "/customers", "/files/**")
                                     .permitAll()
                                     .anyRequest().authenticated();
                         })
